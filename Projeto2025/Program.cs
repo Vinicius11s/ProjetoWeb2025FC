@@ -25,3 +25,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+//Controller > Model (por meio das DTOs por segurança)
+//Repository > entidades (por meio de entidades e infraestrutra para abrir e fechar conexão)

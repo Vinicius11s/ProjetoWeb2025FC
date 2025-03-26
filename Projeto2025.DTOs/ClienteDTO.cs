@@ -30,7 +30,5 @@ namespace Projeto2025.DTOs
         [Display(Name = "Endereço")]
         [Required(ErrorMessage = "O Endereço é obrigatório")]
         public String Endereco { get; set; } = String.Empty;
-
-        public virtual ICollection<Evento> Eventos { get; set; } = new HashSet<Evento>();
     }
 }

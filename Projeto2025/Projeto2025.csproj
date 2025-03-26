@@ -21,6 +21,7 @@
     <ProjectReference Include="..\InfraEstrutura\InfraEstrutura.csproj" />
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\Projeto2025.DTOs\Projeto2025.DTOs.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,21 +14,28 @@ namespace Projeto2025.Controllers
              
         [HttpPost]
         public IActionResult Salvar(ClienteDTO dto) {
-
-            if (ModelState.IsValid)
+            try
             {
-                // executar model (salvar)
-                ViewBag.classe = "text-success";
-                ViewBag.mensagem = "Dados salvos com sucesso!";
+                if (ModelState.IsValid)
+                {
+                    // executar model (salvar)
+                    ViewBag.classe = "alert-success";
+                    ViewBag.mensagem = "Dados salvos com sucesso!";
+                }
+                else
+                {
+                    ViewBag.classe = "alert-danger";
+                    ViewBag.mensagem = "Não foi possível salvar os dados!";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewBag.classe = "text-danger";
-                ViewBag.mensagem = "Não foi possível salvar os dados!";
+                ViewBag.classe = "alert-danger";
+                ViewBag.mensagem = "Erro ao salvar os dados! " + ex.Message;
+                throw;
             }
-
+         
             return View("Index", dto);
-
         }
     }
 }

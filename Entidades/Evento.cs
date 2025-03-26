@@ -16,12 +16,12 @@ namespace Entidades
         public String Status { get; set; } = String.Empty;
 
         public int idCliente { get; set; }
-        public virtual Cliente Cliente { get; set; }
+        public virtual Cliente? Cliente { get; set; }
 
         public int idTipoEvento { get; set; }
-        public virtual TipoEvento TipoEvento { get; set; }
+        public virtual TipoEvento? TipoEvento { get; set; }
 
         public int idFormaPagamento { get; set; }
-        public virtual FormaPagamento FormaPagamento { get; set; }
+        public virtual FormaPagamento? FormaPagamento { get; set; }
     }
 }

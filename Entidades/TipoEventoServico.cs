@@ -9,10 +9,10 @@ namespace Entidades
     public class TipoEventoServico
     {
         public int TipoEventoId { get; set; }
-        public TipoEvento TipoEvento { get; set; }
+        public TipoEvento? TipoEvento { get; set; }
 
         public int ServicoId { get; set; }
-        public Servico Servico { get; set; }
+        public Servico? Servico { get; set; }
     }
 }
 

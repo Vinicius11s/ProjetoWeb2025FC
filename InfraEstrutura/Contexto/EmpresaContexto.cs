@@ -30,7 +30,8 @@ namespace Infraestrutura.Contexto
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Server Master = DESKTOP-6RMV3GQ
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-6RMV3GQ;
+            //Server Toledo = LAB10-12
+            optionsBuilder.UseSqlServer(@"Server=LAB10-12;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
 
