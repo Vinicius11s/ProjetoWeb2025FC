@@ -1,0 +1,54 @@
+﻿@model Projeto2025.DTOs.ServicoDTO
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cliente</h1>
+<form asp-action="Salvar" asp-controller="Cliente" method="post">
+    <input type="hidden" asp-for="id" />
+
+    <div class="form-group">
+        <label asp-for="DataEvento"></label>
+        <input type="datetime" asp-for="DataEvento" class="form-control" />
+        <span class="alert-danger" asp-validation-for="DataEvento">
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="QtdeAdultos"></label>
+        <input type="int" asp-for="QtdeAdultos" class="form-control" />
+        <span class="alert-danger" asp-validation-for="QtdeAdultos">
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="QtdeCriancas"></label>
+        <input type="text" asp-for="QtdeCriancas" class="form-control" />
+        <span class="alert-danger" asp-validation-for="QtdeCriancas">
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ValorTotal"></label>
+        <input type="text" asp-for="ValorTotal" class="form-control" />
+        <span class="alert-danger" asp-validation-for="ValorTotal">
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input type="text" asp-for="Status" class="form-control" />
+        <span class="alert-danger" asp-validation-for="Status">
+        </span>
+    </div>
+
+    <div>
+        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+    </div>
+</form>

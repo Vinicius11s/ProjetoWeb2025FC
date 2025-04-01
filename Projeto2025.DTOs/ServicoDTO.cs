@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entidades;
 
-namespace Entidades
+namespace Projeto2025.DTOs
 {
-    public class Servico
+    public class ServicoDTO
     {
         public int id { get; set; }
-        public String NomeServico { get; set; } = String.Empty;
-        public String ValorServico { get; set; } = String.Empty ;
-        public String QtdeProfissionais { get; set; } = String.Empty;
+        public String ChurrascoTradicional { get; set; } = String.Empty;
+        public String ChurrascoAmericano { get; set; } = String.Empty;
+        public String JantaCompleta { get; set; } = String.Empty;
         public String Cardapio { get; set; } = String.Empty;
 
         public virtual ICollection<TipoEventoServico> TipoEventoServicos { get; set; } = new HashSet<TipoEventoServico>();
-
     }
 }
