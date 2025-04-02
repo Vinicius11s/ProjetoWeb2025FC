@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interfaces.Models
+namespace Interfaces.Repository
 {
-    public interface IClienteModels
-    {
-        IEnumerable<Cliente>
+    public class IEventoReposiory
+    { 
+        
+    
     }
+    
 }

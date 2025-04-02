@@ -37,5 +37,10 @@ namespace Projeto2025.Controllers
          
             return View("Index", dto);
         }
+        public IActionResult Listar()
+        {
+            
+            return View();
+        }
     }
 }

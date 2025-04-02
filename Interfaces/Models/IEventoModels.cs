@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interfaces.Models
 {
-    public interface IClienteModels
+    c interface IEventoModels
     {
-        IEnumerable<Cliente>
     }
 }
