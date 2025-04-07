@@ -10,12 +10,19 @@ using Interfaces.Repository;
 
 namespace Repository
 {
-    public class EventoRepositry : IEventoReposiory
+    public class EventoRepositry : IEventoRepository
     {
         private EmpresaContexto contexto;
         public EventoRepositry( EmpresaContexto contexto)
         {
             this.contexto = contexto;
+        }
+
+        public Evento addEvento(Evento eve)
+        {
+            this.contexto.Set<Evento>().Add(eve);
+            this.contexto.SaveChanges();
+            return eve;
         }
 
         public IEnumerable<Evento> getAll()

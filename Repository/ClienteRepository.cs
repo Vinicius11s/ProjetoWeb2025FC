@@ -20,11 +20,16 @@ namespace Repository
             this.contexto = contexto;
         }
 
-        public Cliente addCliente(Cliente cliente)
+        public Cliente addCliente(Cliente produto)
         {
-            this.contexto.Set<Cliente>().Add(cliente);
+            this.contexto.Set<Cliente>().Add(produto);
             this.contexto.SaveChanges();
-            return cliente;
+            return produto;
+        }
+
+        public IEnumerable<Cliente> GetAll()
+        {
+            return this.contexto.Set<Cliente>().ToList().OrderBy(p => p.Nome);
         }
     }
 }

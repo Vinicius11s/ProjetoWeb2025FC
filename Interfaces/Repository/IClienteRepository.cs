@@ -9,6 +9,8 @@ namespace Interfaces.Repository
 {
     public interface IClienteRepository
     {
-        Cliente addCliente(Cliente cliente);
+        Cliente addCliente(Cliente produto);
+        IEnumerable<Cliente> GetAll();
+
     }
 }

@@ -1,28 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entidades;
 
 namespace Projeto2025.DTOs
 {
     public class EventoDTO
     {
         public int id { get; set; }
+        [Display(Name = "Data Evento")]
+        [Required(ErrorMessage = "A Data do Evento é obrigatória")]
         public DateTime DataEvento { get; set; }
-        public int QtdeAdultos { get; set; }
-        public int QtdeCriancas { get; set; }
-        public int ValorTotal { get; set; }
-        public String Status { get; set; } = String.Empty;
-
-        public int idCliente { get; set; }
-        public virtual Cliente? Cliente { get; set; }
-
-        public int idTipoEvento { get; set; }
-        public virtual TipoEvento? TipoEvento { get; set; }
-
-        public int idFormaPagamento { get; set; }
-        public virtual FormaPagamento? FormaPagamento { get; set; }
     }
 }

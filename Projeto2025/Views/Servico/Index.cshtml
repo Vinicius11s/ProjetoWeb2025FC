@@ -2,26 +2,3 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Cliente</h1>
-<form asp-action="Salvar" asp-controller="Cliente" method="post">
-    <input type="hidden" asp-for="id" />
-
-    <div class="form-group">
-        <label asp-for="Nome"></label>
-        <input type="datetime" asp-for="DataEvento" class="form-control" />
-        <span class="alert-danger" asp-validation-for="DataEvento">
-        </span>
-    </div>
-
-
-    <div>
-        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-success">
-            Salvar
-        </button>
-    </div>
-</form>

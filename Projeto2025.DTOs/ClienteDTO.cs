@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entidades;
 
 namespace Projeto2025.DTOs
 {
@@ -30,5 +29,10 @@ namespace Projeto2025.DTOs
         [Display(Name = "Endereço")]
         [Required(ErrorMessage = "O Endereço é obrigatório")]
         public String Endereco { get; set; } = String.Empty;
+
+        public int? idEvento { get; set; }
+        public virtual EventoDTO? evento { get; set; }
+
+
     }
 }

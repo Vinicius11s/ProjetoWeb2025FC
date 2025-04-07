@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Projeto2025.DTOs;
 
 namespace Interfaces.Models
 {
-    c interface IEventoModels
+    public interface IEventoModels
     {
+        IEnumerable<EventoDTO> getAll();
+        EventoDTO save(EventoDTO dTO);
     }
 }
