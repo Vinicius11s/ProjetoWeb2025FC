@@ -1,7 +1,31 @@
+using Infraestrutura.Contexto;
+using Interfaces.Models;
+using Interfaces.Repository;
+using Microsoft.EntityFrameworkCore;
+using Projeto2025.Models;
+using Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Registrar o DbContext no contêiner de Injeção de Dependência
+builder.Services.AddDbContext<EmpresaContexto>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<IClienteModels, ClienteModel>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+
+builder.Services.AddScoped<IEventoModels, EventoModels>();
+builder.Services.AddScoped<IEventoRepository, EventoRepositry>();
+
+builder.Services.AddScoped<ITipoEventoModels, TipoEventoModel>();
+builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
+
 
 var app = builder.Build();
 
@@ -25,6 +49,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-//Controller > Model (por meio das DTOs por segurança)
-//Repository > entidades (por meio de entidades e infraestrutra para abrir e fechar conexão)

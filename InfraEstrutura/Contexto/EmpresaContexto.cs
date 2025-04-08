@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infraestrutura.Contexto
 {
@@ -29,9 +30,9 @@ namespace Infraestrutura.Contexto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Server Master = DESKTOP-6RMV3GQ
+            //Server Master = DESKTOP-VSA3AAA
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=LAB10-12;
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
 
@@ -87,5 +88,7 @@ namespace Infraestrutura.Contexto
                 .WithMany(t => t.TipoEventoServicos)
                 .HasForeignKey(pt => pt.ServicoId);
         }
+
+        //Add-Migration ModificacaoEntidadeTipoEvento -Context Infraestrutura.Contexto.EmpresaContexto -Project Infraestrutura
     }
 }

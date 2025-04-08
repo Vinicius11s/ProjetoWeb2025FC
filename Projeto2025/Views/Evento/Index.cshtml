@@ -1,41 +1,46 @@
-﻿@model Projeto2025.DTOs.EventoDTO
+﻿    @model Projeto2025.DTOs.EventoDTO
 
 
-@{
-    ViewData["Title"] = "Index";
-}
+    @{
+        ViewData["Title"] = "Index";
+    }
 
-<h1>Evento</h1>
-
-
-
-<div class="col-3">
-    <a asp-action="Listar" asp-controller="Evento"
-       class="btn btn-info">
-        Listar
-    </a>
-</div>
+    <h1>Evento</h1>
 
 
-<form asp-action="Salvar" asp-controller="Evento" method="post">
-    <input type="hidden" asp-for="id" />
 
-    <div class="form-group">
-        <label asp-for="DataEvento"></label>
-        <input type="text" asp-for="DataEvento" class="form-control" />
-        <span class="alert-danger" asp-validation-for="DataEvento">
-        </span>
+    <div class="col-3">
+        <a asp-action="Listar" asp-controller="Evento"
+           class="btn btn-info">
+            Listar
+        </a>
     </div>
 
+    <form asp-action="Salvar" asp-controller="Evento" method="post">
+        <input type="hidden" asp-for="id" />
 
-    <div>
-        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
-    </div>
+        <div class="form-group">
+        <label asp-for="TipoEventoId"></label>
+        <select asp-for="TipoEventoId" class="form-control" asp-items="ViewBag.TiposEvento">
+                <option value="">Selecione um tipo de evento</option>
+            </select>
+        <span class="alert-danger" asp-validation-for="TipoEventoId"></span>
+        </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-success">
-            Salvar
-        </button>
-    </div>
+        <div class="form-group">
+            <label asp-for="DataEvento"></label>
+            <input type="text" asp-for="DataEvento" class="form-control" />
+            <span class="alert-danger" asp-validation-for="DataEvento"></span>
+        </div>
 
-</form>
+        <div>
+            <span class="@ViewBag.classe">@ViewBag.mensagem</span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                Salvar
+            </button>
+        </div>
+
+    </form>

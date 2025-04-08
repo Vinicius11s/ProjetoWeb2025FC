@@ -1,5 +1,6 @@
 ﻿using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers
@@ -7,17 +8,26 @@ namespace Projeto2025.Controllers
     public class EventoController : Controller
     {
         private IEventoModels models;
-        public EventoController(IEventoModels models)
+        private ITipoEventoModels tipoEventoModels;
+        public EventoController(IEventoModels models, ITipoEventoModels tipoEventoModels)
         {
             this.models = models;
+            this.tipoEventoModels = tipoEventoModels;
         }
         public IActionResult Index()
         {
             EventoDTO dto = new EventoDTO();
             dto.id = 0;
 
+            // Obter todos os tipos de evento
+            var tiposEvento = tipoEventoModels.GetAll();
+
+            // Preencher o ViewBag com os tipos de evento
+            ViewBag.TiposEvento = new SelectList(tiposEvento, "id", "Descricao"); // Certifique-se de que a propriedade "Descricao" existe no modelo TipoEvento
+
             return View(dto);
         }
+
         public ActionResult Listar()
         {
             var lista = models.getAll();
