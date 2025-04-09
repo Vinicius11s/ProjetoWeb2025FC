@@ -11,28 +11,32 @@ namespace Projeto2025.DTOs
     {
         public int id { get; set; }
 
-        [Display(Name = "Nome")]
+        [Display(Name = "Nome Completo")]
         [Required(ErrorMessage = "O Nome é obrigatório")]
-        public String Nome { get; set; } = String.Empty;
-
+        public String NomeCompleto { get; set; } = String.Empty;
 
         [Display(Name = "CPF")]
         [Required(ErrorMessage = "O CPF é obrigatório")]
         public String Cpf { get; set; } = String.Empty;
 
+        [Display(Name = "Endereço")]
+        [Required(ErrorMessage = "O Endereço é obrigatório")]
+        public String Endereco { get; set; } = String.Empty;
+
+        [Display(Name = "Data de Nascimento")]
+        [Required(ErrorMessage = "A Data de Nascimento é obrigatória")]
+        public DateTime DataNascimento { get; set; }
 
         [Display(Name = "Telefone")]
         [Required(ErrorMessage = "O Telefone é obrigatório")]
         public String Telefone { get; set; } = String.Empty;
 
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "O Email é obrigatório")]
+        public String Email { get; set; } = String.Empty;
 
-        [Display(Name = "Endereço")]
-        [Required(ErrorMessage = "O Endereço é obrigatório")]
-        public String Endereco { get; set; } = String.Empty;
 
         public int? idEvento { get; set; }
         public virtual EventoDTO? evento { get; set; }
-
-
     }
 }

@@ -11,5 +11,9 @@ namespace Interfaces.Models
     {
         ClienteDTO save(ClienteDTO dTO);
         IEnumerable<ClienteDTO> GetAll();
+        void delete(int id);
+
+        ClienteDTO GetCliente(int id);
+
     }
 }

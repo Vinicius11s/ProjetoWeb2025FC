@@ -32,7 +32,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-VSA3AAA
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
+            optionsBuilder.UseSqlServer(@"Server=LAB10-12;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
 
@@ -41,7 +41,7 @@ namespace Infraestrutura.Contexto
             modelBuilder.Entity<Cliente>(entidade =>
             {
                 entidade.HasKey(e => e.id);
-                entidade.Property(e => e.Nome).HasMaxLength(100);
+                entidade.Property(e => e.NomeCompleto).HasMaxLength(100);
                 entidade.Property(e => e.Endereco).HasMaxLength(200);
 
             });
@@ -88,7 +88,6 @@ namespace Infraestrutura.Contexto
                 .WithMany(t => t.TipoEventoServicos)
                 .HasForeignKey(pt => pt.ServicoId);
         }
-
-        //Add-Migration ModificacaoEntidadeTipoEvento -Context Infraestrutura.Contexto.EmpresaContexto -Project Infraestrutura
+        //Add-Migration AlteracaoPropriedadesCliente -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
     }
 }

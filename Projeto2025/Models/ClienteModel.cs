@@ -1,9 +1,8 @@
-﻿using Projeto2025.DTOs;
-using Interfaces;
+﻿using AutoMapper;
+using Entidades;
 using Interfaces.Models;
 using Interfaces.Repository;
-using AutoMapper;
-using Entidades;
+using Projeto2025.DTOs;
 
 namespace Projeto2025.Models
 {
@@ -23,9 +22,27 @@ namespace Projeto2025.Models
         public ClienteDTO save(ClienteDTO dTO)
         {
             Cliente entidade = mapper.Map<Cliente>(dTO);
-            repository.addCliente(entidade);
-            dTO = mapper.Map<ClienteDTO>(entidade);
-            return dTO;
+
+            if(entidade.id == 0){
+                repository.addCliente(entidade);
+            }
+            else{
+                repository.updateCliente(entidade);
+                dTO = mapper.Map<ClienteDTO>(entidade);
+                return dTO;
+            }
+           
+        }
+
+        public void delete(int id)
+        {
+            this.repository.delete(id);
+      
+        }
+        public ClienteDTO GetCliente(int id)
+        {
+            var cliente = this.GetCliente(id);
+            return mapper.Map<ClienteDTO>(cliente);
         }
     }
 }

@@ -12,9 +12,9 @@
 
 
     <div class="form-group">
-        <label asp-for="Nome"></label>
-        <input type="text" asp-for="Nome" class="form-control" />
-        <span class="alert-danger" asp-validation-for="Nome">
+        <label asp-for="NomeCompleto"></label>
+        <input type="text" asp-for="NomeCompleto" class="form-control" />
+        <span class="alert-danger" asp-validation-for="NomeCompleto">
         </span>
     </div>
 
@@ -26,6 +26,19 @@
         </span>
     </div>
 
+    <div class="form-group">
+        <label asp-for="Endereco"></label>
+        <input type="text" asp-for="Endereco" class="form-control" />
+        <span class="alert-danger" asp-validation-for="Endereco">
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DataNascimento"></label>
+        <input type="date" asp-for="DataNascimento" class="form-control" />
+        <span class="alert-danger" asp-validation-for="DataNascimento">
+        </span>
+    </div>
 
     <div class="form-group">
         <label asp-for="Telefone"></label>
@@ -34,15 +47,13 @@
         </span>
     </div>
 
-
     <div class="form-group">
-        <label asp-for="Endereco"></label>
-        <input type="text" asp-for="Endereco" class="form-control" />
-        <span class="alert-danger" asp-validation-for="Endereco">
+        <label asp-for="Email"></label>
+        <input type="text" asp-for="Email" class="form-control" />
+        <span class="alert-danger" asp-validation-for="Email">
         </span>
     </div>
-
-
+    
     <div class="form-group">
         <label asp-for="idEvento"></label>
         <select asp-for="idEvento" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaEve">

@@ -18,20 +18,25 @@ namespace Projeto2025.Controllers
             this.eventoModels = eventoModels;
         }
 
+        public IEnumerable<SelectListItem> carregaListaEvento()
+        {
+            var listaEve = eventoModels.getAll();
+            return listaEve.Select(e => new SelectListItem
+            {
+                Value = e.id.ToString(),
+                Text = e.DataEvento.ToString()
+            });
+        }
+
         public IActionResult Index()
         {
             ClienteDTO dto = new ClienteDTO();
             dto.id = 0;
 
-            //obter as categorias e retornar para a View
-            var listaEve =  eventoModels.getAll();
-            ViewBag.listaEve = listaEve.Select(c=> new SelectListItem { 
-                Value = c.id.ToString(),
-                Text = c.DataEvento.ToString()
-            });
+            ViewBag.listaEve = carregaListaEvento();
+                
             return View(dto);
         }
-
         public ActionResult Listar()
         {
             var lista = models.GetAll();
@@ -41,10 +46,9 @@ namespace Projeto2025.Controllers
         [HttpPost]
         public IActionResult Salvar(ClienteDTO dto)
         {
-
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid) //modelo valido ?
                 {
                     // executar model (salvar)
                     dto = this.models.save(dto);
@@ -65,16 +69,34 @@ namespace Projeto2025.Controllers
                     ex.Message;
             }
 
-            //obter as categorias e retornar para a View
-            var listaCat = eventoModels.getAll();
-            ViewBag.listaCat = listaCat.Select(c => new SelectListItem
-            {
-                Value = c.id.ToString(),
-                Text = c.DataEvento.ToString()
-            });
-
+            ViewBag.listaEve = carregaListaEvento();
             return View("Index", dto);
 
+        }
+        public IActionResult Excluir(int id){
+            try
+            {
+                this.models.delete(id);
+                ViewBag.mensagem = "Exclusão efetuada com sucesso !";
+                ViewBag.classe = "alert-sucess";
+            }
+            catch (Exception)
+            {
+                ViewBag.mensagem = "Ops.. ocorreu um erro ao excluir o item";
+                ViewBag.classe = "alert-danger";
+            }
+            var lista = models.GetAll();
+            return View("Listar", lista);
+        }
+        public IActionResult PreAlterar(int id)
+        {
+            //controller vai pra model > repositorio e depois retorna
+            var objDTO = this.models.GetCliente(id);
+
+            ViewBag.listaEve = carregaListaEvento();
+
+            return View("Index", objDTO);
+            
         }
     }
 }
