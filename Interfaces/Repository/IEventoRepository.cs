@@ -9,7 +9,10 @@ namespace Interfaces.Repository
 {
     public interface IEventoRepository
     {
-        IEnumerable<Evento> getAll();
-        Evento addEvento(Evento evento);
+        Evento addEvento (Evento servico);
+        Evento updateEevnto (Evento servico);
+        Evento GetEvento(int id);
+        IEnumerable<Evento> GetAll();
+        void delete(int id);
     }
 }

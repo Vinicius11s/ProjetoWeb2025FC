@@ -9,6 +9,9 @@ namespace Interfaces.Models
 {
     public interface ITipoEventoModels
     {
+        TipoEventoDTO save(TipoEventoDTO dTO);
         IEnumerable<TipoEventoDTO> GetAll();
+        void delete(int id);
+        TipoEventoDTO GetTipoEvento(int id);
     }
 }

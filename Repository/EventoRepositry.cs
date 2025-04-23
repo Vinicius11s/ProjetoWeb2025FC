@@ -25,9 +25,29 @@ namespace Repository
             return eve;
         }
 
+        public void delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Evento> getAll()
         {
             return this.contexto.Set<Evento>().ToList().OrderBy(p => p.DataEvento);
+        }
+
+        public IEnumerable<Evento> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Evento GetEvento(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Evento updateEevnto(Evento servico)
+        {
+            throw new NotImplementedException();
         }
     }
 }

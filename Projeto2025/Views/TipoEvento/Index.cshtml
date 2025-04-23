@@ -1,0 +1,41 @@
+﻿@model Projeto2025.DTOs.TipoEventoDTO
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tipo Evento</h1>
+
+
+<form asp-action="Salvar" asp-controller="Cliente" method="post">
+    <input type="hidden" asp-for="id" />
+
+
+    <div class="form-group">
+        <label asp-for="Descricao"></label>
+        <input type="text" asp-for="Descricao" class="form-control" />
+        <span class="alert-danger" asp-validation-for="Descricao">
+        </span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Valor"></label>
+        <input type="text" asp-for="Valor" class="form-control" />
+        <span class="alert-danger" asp-validation-for="Valor">
+        </span>
+    </div>
+
+    <div>
+        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+    </div>
+
+
+</form>

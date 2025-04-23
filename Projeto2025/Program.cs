@@ -20,7 +20,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IClienteModels, ClienteModel>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
-builder.Services.AddScoped<IEventoModels, EventoModels>();
+builder.Services.AddScoped<IEventoModels, EventoModel>();
 builder.Services.AddScoped<IEventoRepository, EventoRepositry>();
 
 builder.Services.AddScoped<ITipoEventoModels, TipoEventoModel>();

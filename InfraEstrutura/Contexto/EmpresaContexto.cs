@@ -26,7 +26,6 @@ namespace Infraestrutura.Contexto
         public DbSet<Login> logins { get; set; }
         public DbSet<Servico> servicos { get; set; }
         public DbSet<TipoEvento> tiposEventos { get; set; }
-        public DbSet<TipoEventoServico> tiposEventosServicos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,7 +48,6 @@ namespace Infraestrutura.Contexto
             modelBuilder.Entity<Evento>(entidade =>
             {
                 entidade.HasKey(e => e.id);
-                entidade.Property(e => e.ValorTotal).HasPrecision(8, 2);
 
                 entidade.HasOne(e => e.Cliente)
                     .WithMany(c => c.Eventos)
@@ -75,19 +73,7 @@ namespace Infraestrutura.Contexto
                 entidade.HasKey(e => e.id);
             });
 
-            modelBuilder.Entity<TipoEventoServico>()
-                .HasKey(t => new { t.TipoEventoId, t.ServicoId });
-
-            modelBuilder.Entity<TipoEventoServico>()
-                .HasOne(pt => pt.TipoEvento)
-                .WithMany(p => p.TipoEventoServicos)
-                .HasForeignKey(pt => pt.TipoEventoId);
-
-            modelBuilder.Entity<TipoEventoServico>()
-                .HasOne(pt => pt.Servico)
-                .WithMany(t => t.TipoEventoServicos)
-                .HasForeignKey(pt => pt.ServicoId);
+            //Add-Migration AlteracaoPropriedadesCliente -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
         }
-        //Add-Migration AlteracaoPropriedadesCliente -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
     }
 }

@@ -23,17 +23,19 @@ namespace Projeto2025.Models
         {
             Cliente entidade = mapper.Map<Cliente>(dTO);
 
-            if(entidade.id == 0){
+            if (entidade.id == 0)
+            {
                 repository.addCliente(entidade);
             }
-            else{
+            else
+            {
                 repository.updateCliente(entidade);
-                dTO = mapper.Map<ClienteDTO>(entidade);
-                return dTO;
             }
-           
-        }
 
+            // Sempre remapeia o objeto atualizado e retorna
+            dTO = mapper.Map<ClienteDTO>(entidade);
+            return dTO;
+        }
         public void delete(int id)
         {
             this.repository.delete(id);

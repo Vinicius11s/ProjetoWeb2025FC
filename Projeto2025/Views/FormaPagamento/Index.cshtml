@@ -1,0 +1,25 @@
+﻿@model Projeto2025.DTOs.FormaPagamentoDTO
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Forma Pagamento</h1>
+
+
+<form asp-action="Salvar" asp-controller="Forma Pagamento" method="post">
+    <input type="hidden" asp-for="id" />
+
+    <div>
+        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+    </div>
+
+
+</form>

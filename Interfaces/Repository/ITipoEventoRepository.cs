@@ -9,6 +9,10 @@ namespace Interfaces.Repository
 {
     public interface ITipoEventoRepository
     {
+        TipoEvento addTipoEvento (TipoEvento tipoEvento);
+        TipoEvento updateTipoEvento (TipoEvento tipoEvento);
+        TipoEvento GetTipoEvento(int id);
         IEnumerable<TipoEvento> GetAll();
+        void delete(int id);
     }
 }

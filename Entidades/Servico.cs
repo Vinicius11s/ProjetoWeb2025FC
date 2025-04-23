@@ -13,8 +13,5 @@ namespace Entidades
         public String ValorServico { get; set; } = String.Empty ;
         public String QtdeProfissionais { get; set; } = String.Empty;
         public String Cardapio { get; set; } = String.Empty;
-
-        public virtual ICollection<TipoEventoServico> TipoEventoServicos { get; set; } = new HashSet<TipoEventoServico>();
-
     }
 }
