@@ -32,7 +32,7 @@ namespace Repository
 
         public IEnumerable<FormaPagamento> GetAll()
         {
-            return this.contexto.Set<FormaPagamento>().ToList().OrderBy(p => p.Debito);//descricao
+            return this.contexto.Set<FormaPagamento>().ToList().OrderBy(p => p.Descricao);//descricao
         }
         public FormaPagamento GetFormaPagamento(int id)
         {

@@ -23,6 +23,12 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IEventoModels, EventoModel>();
 builder.Services.AddScoped<IEventoRepository, EventoRepositry>();
 
+builder.Services.AddScoped<IFormaPagamentoModels, FormaPagamentoModel>();
+builder.Services.AddScoped<IFormaPagamentoRepository, FormaPagamentoRepository>();
+
+builder.Services.AddScoped<IServicoModels, ServicoModel>();
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+
 builder.Services.AddScoped<ITipoEventoModels, TipoEventoModel>();
 builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
 

@@ -23,7 +23,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Evento" asp-action="Index">Evento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="FormaPagamento" asp-action="Index">Forma Pagamento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Servico" asp-action="Privacy">Serviço</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TipoEveto" asp-action="Privacy">Tipo Evento</a>
                         </li>
                     </ul>
                 </div>
@@ -33,9 +45,10 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+                </main>
+            </div>
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - Projeto2025 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

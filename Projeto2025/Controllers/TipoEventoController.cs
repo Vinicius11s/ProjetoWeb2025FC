@@ -18,7 +18,7 @@ namespace Projeto2025.Controllers
 
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
-            var listaTipoEve = eventoModels.getAll();
+            var listaTipoEve = eventoModels.GetAll();
             return listaTipoEve.Select(e => new SelectListItem
             {
                 Value = e.id.ToString(),

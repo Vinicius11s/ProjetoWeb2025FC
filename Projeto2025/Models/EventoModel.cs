@@ -15,13 +15,25 @@ namespace Interfaces.Models
             this.repository = repository;
             this.mapper = mapper;
         }
-        public IEnumerable<EventoDTO> getAll()
+
+        public void delete(int id)
+        {
+            this.repository.delete(id);
+        }
+
+        public IEnumerable<EventoDTO> GetAll()
         {
             var listaEvento = this.repository.GetAll();
             var listaEveDTO =
                 mapper.Map<IEnumerable<EventoDTO>>(listaEvento);
             return listaEveDTO;
         }
+
+        public ClienteDTO GetEvento(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public EventoDTO save(EventoDTO dTO)
         {
             Evento entidade = mapper.Map<Evento>(dTO);

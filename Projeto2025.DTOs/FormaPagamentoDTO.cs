@@ -9,10 +9,7 @@ namespace Projeto2025.DTOs
     public class FormaPagamentoDTO
     {
         public int id { get; set; }
-        public int Credito { get; set; }
-        public int Debito { get; set; }
-        public int Dinheiro { get; set; }
-        public int Pix { get; set; }
+        public String Descricao { get; set; } = String.Empty;
 
         //public virtual ICollection<Evento> Eventos { get; set; } = new HashSet<Evento>();
     }

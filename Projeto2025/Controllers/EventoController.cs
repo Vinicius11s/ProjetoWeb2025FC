@@ -14,6 +14,15 @@ namespace Projeto2025.Controllers
             this.models = models;
             this.tipoEventoModels = tipoEventoModels;
         }
+        public IEnumerable<SelectListItem> carregaListaTipoEvento()
+        {
+            var listaEve = tipoEventoModels.GetAll();
+            return listaEve.Select(e => new SelectListItem
+            {
+                Value = e.id.ToString(),
+                Text = e.Descricao.ToString()
+            });
+        }
         public IActionResult Index()
         {
             EventoDTO dto = new EventoDTO();
@@ -27,11 +36,37 @@ namespace Projeto2025.Controllers
 
             return View(dto);
         }
-
         public ActionResult Listar()
         {
-            var lista = models.getAll();
+            var lista = models.GetAll();
             return View(lista);
+        }
+        public ActionResult Excluir(int id)
+        {
+
+            try
+            {
+                this.models.delete(id);
+                ViewBag.mensagem = "Exclusão efetuada com sucesso!";
+                ViewBag.classe = "alert-success";
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.mensagem = "Não foi possível excluir o item!";
+                ViewBag.classe = "alert-danger";
+            }
+
+            var lista = models.GetAll();
+            return View("Listar", lista);
+        }
+        public IActionResult PreAlterar(int id)
+        {
+            var objDTO = this.models.GetEvento(id);
+
+            ViewBag.listaEve = carregaListaTipoEvento();
+
+            return View("Index", objDTO);
         }
         [HttpPost]
         public IActionResult Salvar(EventoDTO dto)

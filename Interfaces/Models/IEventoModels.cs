@@ -9,7 +9,9 @@ namespace Interfaces.Models
 {
     public interface IEventoModels
     {
-        IEnumerable<EventoDTO> getAll();
         EventoDTO save(EventoDTO dTO);
+        IEnumerable<EventoDTO> GetAll();
+        void delete(int id);
+        ClienteDTO GetEvento(int id);
     }
 }

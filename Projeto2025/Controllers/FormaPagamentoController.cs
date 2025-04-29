@@ -18,7 +18,7 @@ namespace Projeto2025.Controllers
             return listaFormas.Select(e => new SelectListItem
             {
                 Value = e.id.ToString(),
-                Text = e.Pix.ToString()//colocarDescricao
+                Text = e.Descricao.ToString()//colocarDescricao
             });
         }
         public IActionResult Index()

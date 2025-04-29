@@ -11,8 +11,8 @@ namespace Interfaces.Repository
     {
         Evento addEvento (Evento servico);
         Evento updateEevnto (Evento servico);
-        Evento GetEvento(int id);
         IEnumerable<Evento> GetAll();
+        Evento GetEvento(int id);
         void delete(int id);
     }
 }

@@ -24,30 +24,31 @@ namespace Repository
             this.contexto.SaveChanges();
             return eve;
         }
-
-        public void delete(int id)
+        public Evento updateEevnto(Evento servico)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Evento> getAll()
-        {
-            return this.contexto.Set<Evento>().ToList().OrderBy(p => p.DataEvento);
-        }
+
 
         public IEnumerable<Evento> GetAll()
         {
-            throw new NotImplementedException();
+            return this.contexto.Set<Evento>().ToList().OrderBy(e => e.id);
         }
 
         public Evento GetEvento(int id)
         {
-            throw new NotImplementedException();
+            return this.contexto.Set<Evento>().Find(id);
         }
 
-        public Evento updateEevnto(Evento servico)
+        public void delete(int id)
         {
-            throw new NotImplementedException();
+            var obj = contexto.Set<Evento>().Find(id);
+            if(obj != null)
+            {
+                this.contexto.Remove(obj);
+                this.contexto.SaveChanges();
+            }
         }
     }
 }
