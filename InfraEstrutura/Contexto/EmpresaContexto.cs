@@ -31,10 +31,9 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-VSA3AAA 
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
+            optionsBuilder.UseSqlServer(@"Server=LAB10-12;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>(entidade =>
@@ -73,7 +72,7 @@ namespace Infraestrutura.Contexto
                 entidade.HasKey(e => e.id);
             });
 
-            //Add-Migration AlterEntityFormaPag -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
+            //Add-Migration AtualizandoBD -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
         }
     }
 }

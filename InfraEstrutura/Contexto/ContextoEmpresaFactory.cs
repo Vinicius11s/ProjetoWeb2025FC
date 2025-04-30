@@ -9,7 +9,7 @@ public class ContextoEmpresaFactory : IDesignTimeDbContextFactory<EmpresaContext
         var optionsBuilder = new DbContextOptionsBuilder<EmpresaContexto>();
 
         // Defina a string de conexão de forma que o EF possa usar durante o processo de migração.
-        optionsBuilder.UseSqlServer(@"Server=DESKTOP-6RMV3GQ;
+        optionsBuilder.UseSqlServer(@"Server=LAB10-12;
                 DataBase=dbEmpresa2025;integrated security=true;TrustServerCertificate=True;");
         return new EmpresaContexto(optionsBuilder.Options);
     }
