@@ -18,7 +18,6 @@ namespace Projeto2025.Controllers
             dto.id = 0;
             return View(dto);
         }
-
         public ActionResult Listar()
         {
             var lista = models.GetAll();

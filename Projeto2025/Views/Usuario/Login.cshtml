@@ -1,0 +1,47 @@
+﻿@model Projeto2025.DTOs.UsuarioLoginDTO
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+
+    <title>Login</title>
+</head>
+<body class="login-dark d-flex justify-content-center align-items-center">
+    <div class="login-card p-4 rounded shadow">
+        <h4 class="text-center mb-4 text-light">Entrar no sistema</h4>
+
+        <form asp-controller="Usuario" asp-action="Logar" method="post">
+            @if (!string.IsNullOrEmpty(ViewBag.mensagem as string))
+            {
+                <div class="alert alert-warning">@ViewBag.mensagem</div>
+            }
+
+            <div class="form-group">
+                <input type="email" asp-for="email" class="form-control input-dark" placeholder="Email" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" asp-for="password" class="form-control input-dark" placeholder="Senha" />
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-block">Entrar</button>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" asp-controller="Usuario" class="text-secondary">Criar nova conta</a>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+    
+</html>

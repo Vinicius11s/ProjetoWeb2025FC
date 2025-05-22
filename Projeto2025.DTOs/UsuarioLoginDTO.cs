@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Projeto2025.DTOs
 {
-    public class LoginDTO
+    public class UsuarioLoginDTO
     {
-        public String email { get; set; }
-        public String password { get; set; }
+        public String email { get; set; } = String.Empty;
+        public String password { get; set; } = String.Empty;
     }
 }

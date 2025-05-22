@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Interfaces.Models
 {
-    public interface ILoginModels
+    public interface IUsuarioModels
     {
-        LoginDTO validarLogin(string email, string password);
+        UsuarioDTO validarLogin(string email, string senha);
+        UsuarioDTO save(UsuarioDTO dTO);
     }
 }

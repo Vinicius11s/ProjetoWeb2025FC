@@ -23,15 +23,15 @@ namespace Infraestrutura.Contexto
         public DbSet<Cliente> clientes { get; set; }
         public DbSet<Evento> eventos { get; set; }
         public DbSet<FormaPagamento> formasPagamento { get; set; }
-        public DbSet<Login> logins { get; set; }
+        public DbSet<Usuario> usuarios { get; set; }
         public DbSet<Servico> servicos { get; set; }
         public DbSet<TipoEvento> tiposEventos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Server Master = DESKTOP-VSA3AAA 
+            //Server Master = DESKTOP-VSA3AAA
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=LAB10-12;
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

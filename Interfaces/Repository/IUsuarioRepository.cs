@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace Interfaces.Repository
 {
-    public interface ILoginRepository
+    public interface IUsuarioRepository
     {
-        Login recuperar(Expression<Func<Login, bool>> expression);     
+        Usuario recuperar
+            (Expression<Func<Usuario, bool>> expression);
+        Usuario add(Usuario produto);
+        Usuario update(Usuario produto);
     }
 }

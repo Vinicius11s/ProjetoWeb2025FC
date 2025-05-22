@@ -1,0 +1,25 @@
+.login-dark {
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.input-dark {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+    .input-dark::placeholder {
+        color: #aaa;
+    }

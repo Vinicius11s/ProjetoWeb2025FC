@@ -2,6 +2,7 @@
 using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Projeto2025.Configuration;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers
@@ -15,6 +16,8 @@ namespace Projeto2025.Controllers
             this.models = models;
             this.eventoModels = eventoModels;
         }
+        
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaEvento()
         {
             var listaEve = eventoModels.GetAll();
@@ -24,6 +27,7 @@ namespace Projeto2025.Controllers
                 Text = e.DataEvento.ToString()
             });
         }
+        [SessionAuthorize]
         public IActionResult Index()
         {
             ClienteDTO dto = new ClienteDTO();
@@ -33,11 +37,13 @@ namespace Projeto2025.Controllers
                 
             return View(dto);
         }
+        [SessionAuthorize]
         public ActionResult Listar()
         {
             var lista = models.GetAll();
             return View(lista);
         }
+        [SessionAuthorize]
         public IActionResult Excluir(int id)
         {
             try
@@ -54,6 +60,7 @@ namespace Projeto2025.Controllers
             var lista = models.GetAll();
             return View("Listar", lista);
         }
+        [SessionAuthorize]
         public IActionResult PreAlterar(int id)
         {
             //controller vai pra model > repositorio e depois retorna
@@ -65,6 +72,7 @@ namespace Projeto2025.Controllers
         }
 
         [HttpPost]
+        [SessionAuthorize]
         public IActionResult Salvar(ClienteDTO dto)
         {
             try
