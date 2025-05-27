@@ -14,8 +14,7 @@ namespace Projeto2025.Configuration
             {
                 context.Result = new RedirectToActionResult("Login", "Usuario", null);
             }
-
             base.OnActionExecuting(context);
         }
-    }
+    }    
 }

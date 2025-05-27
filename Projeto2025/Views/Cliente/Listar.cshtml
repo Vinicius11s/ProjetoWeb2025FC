@@ -1,20 +1,24 @@
 ﻿@model IEnumerable<Projeto2025.DTOs.ClienteDTO>
-
 @{
     ViewData["Title"] = "Listar";
 }
 
-<h1>Listar</h1>
+<h1>Listar Cliente</h1>
 
-<div>
+<div class="col-3 mt-3">
+    <a asp-action="Index" asp-controller="Cliente" class="btn btn-success">
+        Novo
+    </a>
+</div>
+<div class="col-3 mt-3">
     <span class="@ViewBag.classe">@ViewBag.mensagem</span>
 </div>
-
+<div class="mt-3">
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Código</th>
-            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
             <th scope="col">Alterar</th>
             <th scope="col">Excluir</th>
         </tr>
@@ -25,19 +29,25 @@
             <tr>
                 <th scope="row">@item.id</th>
                 <td>@item.NomeCompleto</td>
-                <td><a class="btn btn-success">Alterar</a></td>
-                <td>                    
+                <td>
+                    <a asp-action="PreAlterar"
+                        asp-controller="Cliente"
+                        asp-route-id="@item.id"
+                        class="btn btn-success">Alterar</a>
+                </td>
+                <td>
                     <form asp-action="Excluir" asp-controller="Cliente"
-                    asp-route-id="@item.id" method="get">
+                            asp-route-id="@item.id" method="get">
 
                         <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('Tem certeza que deseja excluir esse registro')">
-                        Excluir
-                    </button>
-                    </form>    
+                                onclick="return confirm('Confirma a exclusão?') ">
+                            Excluir
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</div>
 

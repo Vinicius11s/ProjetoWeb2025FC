@@ -26,13 +26,15 @@ namespace Repository
             this.contexto.SaveChanges();
             return produto;
         }
-        public Cliente updateCliente(Cliente produto)
+        public void delete(int id)
         {
-            this.contexto.Set<Cliente>().Update(produto);
-            this.contexto.SaveChanges();
-            return produto;
+            var obj = this.contexto.Set<Cliente>().Find(id);
+            if (obj != null)
+            {
+                this.contexto.Remove(obj);
+                this.contexto.SaveChanges();
+            }
         }
-
         public IEnumerable<Cliente> GetAll()
         {
             return this.contexto.Set<Cliente>().ToList().OrderBy(p => p.NomeCompleto);
@@ -41,13 +43,16 @@ namespace Repository
         {
             return this.contexto.Set<Cliente>().Find(id);
         }
-
-        public void delete(int id){
-            var obj = this.contexto.Set<Cliente>().Find(id);
-            if(obj != null){
-                this.contexto.Remove(obj);
-                this.contexto.SaveChanges();
-            }
-        }           
+        public Cliente recuperar(Func<Cliente, bool> expressao)
+        {
+            return this.contexto.Set<Cliente>().Where(expressao).FirstOrDefault();
+        }
+        public Cliente updateCliente(Cliente produto)
+        {
+            this.contexto.Set<Cliente>().Update(produto);
+            this.contexto.SaveChanges();
+            return produto;
+        }
+       
     }
 }

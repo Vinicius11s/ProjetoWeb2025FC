@@ -10,9 +10,10 @@ namespace Interfaces.Repository
     public interface IClienteRepository
     {
         Cliente addCliente(Cliente cliente);
-        Cliente updateCliente(Cliente cliente);
-        Cliente GetCliente(int id);
         IEnumerable<Cliente> GetAll();
         void delete(int id);
+        Cliente GetCliente(int id);
+        Cliente updateCliente(Cliente cliente);
+        Cliente recuperar(Func<Cliente, bool> expressao);
     }
 }

@@ -9,10 +9,12 @@ namespace Projeto2025.Controllers
     {
         private IEventoModels models;
         private ITipoEventoModels tipoEventoModels;
-        public EventoController(IEventoModels models, ITipoEventoModels tipoEventoModels)
+        private IClienteModels clienteModels;
+        public EventoController(IEventoModels models, ITipoEventoModels tipoEventoModels, IClienteModels clienteModels)
         {
             this.models = models;
             this.tipoEventoModels = tipoEventoModels;
+            this.clienteModels = clienteModels;
         }
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
@@ -23,6 +25,16 @@ namespace Projeto2025.Controllers
                 Text = e.Descricao.ToString()
             });
         }
+
+        public IEnumerable<SelectListItem> carregaListaClientes()
+        {
+            var listaCli = clienteModels.GetAll();
+            return listaCli.Select(e => new SelectListItem
+            {
+                Value = e.id.ToString(),
+                Text = e.NomeCompleto.ToString()
+            });
+        }
         public IActionResult Index()
         {
             EventoDTO dto = new EventoDTO();
@@ -30,9 +42,11 @@ namespace Projeto2025.Controllers
 
             // Obter todos os tipos de evento
             var tiposEvento = tipoEventoModels.GetAll();
+            var clientes = clienteModels.GetAll();
 
             // Preencher o ViewBag com os tipos de evento
             ViewBag.TiposEvento = new SelectList(tiposEvento, "id", "Descricao"); // Certifique-se de que a propriedade "Descricao" existe no modelo TipoEvento
+            ViewBag.Clientes = new SelectList(clientes, "id", "NomeCompleto");
 
             return View(dto);
         }

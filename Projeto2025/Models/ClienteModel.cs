@@ -15,9 +15,25 @@ namespace Projeto2025.Models
             this.repository = repository;
             this.mapper = mapper;
         }
+
+        public void delete(int id)
+        {
+            this.repository.delete(id);
+
+        }
         public IEnumerable<ClienteDTO> GetAll()
         {
             return mapper.Map<IEnumerable<ClienteDTO>>(repository.GetAll());
+        }
+        public ClienteDTO GetCliente(int id)
+        {
+            var cliente = this.repository.GetCliente(id);
+            return mapper.Map<ClienteDTO>(cliente);
+        }
+        public ClienteDTO recuperar(Func<Cliente, bool> expressao)
+        {
+            var produto = this.repository.recuperar(expressao);
+            return mapper.Map<ClienteDTO>(produto);
         }
         public ClienteDTO save(ClienteDTO dTO)
         {
@@ -36,15 +52,7 @@ namespace Projeto2025.Models
             dTO = mapper.Map<ClienteDTO>(entidade);
             return dTO;
         }
-        public void delete(int id)
-        {
-            this.repository.delete(id);
-      
-        }
-        public ClienteDTO GetCliente(int id)
-        {
-            var cliente = this.GetCliente(id);
-            return mapper.Map<ClienteDTO>(cliente);
-        }
+        
+       
     }
 }
