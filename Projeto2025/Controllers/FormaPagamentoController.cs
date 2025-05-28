@@ -1,6 +1,7 @@
 ﻿using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Projeto2025.Configuration;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers

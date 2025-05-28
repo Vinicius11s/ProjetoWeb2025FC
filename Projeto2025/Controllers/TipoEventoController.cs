@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Projeto2025.DTOs;
+using Projeto2025.Configuration;
 
 namespace Projeto2025.Controllers
 {

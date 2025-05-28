@@ -28,19 +28,14 @@ namespace Repository
         {
             throw new NotImplementedException();
         }
-
-
-
         public IEnumerable<Evento> GetAll()
         {
             return this.contexto.Set<Evento>().ToList().OrderBy(e => e.id);
         }
-
         public Evento GetEvento(int id)
         {
             return this.contexto.Set<Evento>().Find(id);
         }
-
         public void delete(int id)
         {
             var obj = contexto.Set<Evento>().Find(id);

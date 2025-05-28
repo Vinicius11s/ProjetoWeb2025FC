@@ -9,15 +9,17 @@ namespace Entidades
     public class Evento
     {
         public int id { get; set; }
+
+        public int idTipoEvento { get; set; }
+        public virtual TipoEvento? TipoEvento { get; set; }
+
+
         public DateTime DataEvento { get; set; }
         public int QtdePessoas { get; set; }
         public String Status { get; set; } = String.Empty;
 
         public int idCliente { get; set; }
         public virtual Cliente? Cliente { get; set; }
-
-        public int idTipoEvento { get; set; }
-        public virtual TipoEvento? TipoEvento { get; set; }
 
         public int idFormaPagamento { get; set; }
         public virtual FormaPagamento? FormaPagamento { get; set; }

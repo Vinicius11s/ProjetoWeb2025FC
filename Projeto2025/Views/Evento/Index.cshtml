@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label asp-for="idFormaPagamento"></label>
-        <select asp-for="idFormaPagamento" class="form-control" asp-items="ViewBag.TiposEvento">
+        <select asp-for="idFormaPagamento" class="form-control" asp-items="ViewBag.formasPagamento">
             <option value="">Selecione a Forma de Pagamento</option>
         </select>
         <span class="alert-danger" asp-validation-for="idFormaPagamento"></span>

@@ -32,20 +32,13 @@ namespace Projeto2025.DTOs
 
 
         [Display(Name = "Cliente / Dono da Festa")]
-        [Required(ErrorMessage = "O Cliente / Dono da Festa é obrigatório")]
+        //[Required(ErrorMessage = "O Cliente / Dono da Festa é obrigatório")]
         public int idCliente { get; set; }
 
 
         [Display(Name = "Informe a Forma de Pagamento")]
-        [Required(ErrorMessage = "A Forma de Pagamento é obrigatório")]
+        //[Required(ErrorMessage = "A Forma de Pagamento é obrigatório")]
         public int idFormaPagamento { get; set; }
-
-
-
-
-
-
-     
         public String Descricao { get; set; } = String.Empty;
     }
 }

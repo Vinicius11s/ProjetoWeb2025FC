@@ -1,4 +1,5 @@
-﻿using Interfaces.Models;
+﻿using Entidades;
+using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Projeto2025.DTOs;
@@ -10,11 +11,14 @@ namespace Projeto2025.Controllers
         private IEventoModels models;
         private ITipoEventoModels tipoEventoModels;
         private IClienteModels clienteModels;
-        public EventoController(IEventoModels models, ITipoEventoModels tipoEventoModels, IClienteModels clienteModels)
+        private IFormaPagamentoModels formaPagamentoModels;
+        public EventoController(IEventoModels models, ITipoEventoModels tipoEventoModels, IClienteModels clienteModels
+            , IFormaPagamentoModels formaPagamentoModels)
         {
             this.models = models;
             this.tipoEventoModels = tipoEventoModels;
             this.clienteModels = clienteModels;
+            this.formaPagamentoModels = formaPagamentoModels;
         }
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
@@ -35,6 +39,16 @@ namespace Projeto2025.Controllers
                 Text = e.NomeCompleto.ToString()
             });
         }
+
+        public IEnumerable<SelectListItem> carregaListaFormaPagamento()
+        {
+            var listaForma = formaPagamentoModels.GetAll();
+            return listaForma.Select(e => new SelectListItem
+            {
+                Value = e.id.ToString(),
+                Text = e.Descricao.ToString()
+            });
+        }
         public IActionResult Index()
         {
             EventoDTO dto = new EventoDTO();
@@ -43,10 +57,12 @@ namespace Projeto2025.Controllers
             // Obter todos os tipos de evento
             var tiposEvento = tipoEventoModels.GetAll();
             var clientes = clienteModels.GetAll();
+            var formasDePagamento = formaPagamentoModels.GetAll();
 
             // Preencher o ViewBag com os tipos de evento
             ViewBag.TiposEvento = new SelectList(tiposEvento, "id", "Descricao"); // Certifique-se de que a propriedade "Descricao" existe no modelo TipoEvento
             ViewBag.Clientes = new SelectList(clientes, "id", "NomeCompleto");
+            ViewBag.formasPagamento = new SelectList(formasDePagamento, "id", "Descricao");
 
             return View(dto);
         }
