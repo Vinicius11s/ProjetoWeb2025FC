@@ -7,6 +7,7 @@ using Entidades;
 using Infraestrutura.Contexto;
 using Interfaces;
 using Interfaces.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -24,9 +25,17 @@ namespace Repository
             this.contexto.SaveChanges();
             return eve;
         }
-        public Evento updateEevnto(Evento servico)
+        public Evento updateEevnto(Evento evento)
         {
-            throw new NotImplementedException();
+            var eventoaux = contexto.Set<Evento>().Find(evento.id);
+
+            if (eventoaux != null)
+            {
+                contexto.Entry(eventoaux).State = EntityState.Detached;
+                this.contexto.Set<Evento>().Update(evento);
+                this.contexto.SaveChanges();
+            }
+            return evento;
         }
         public IEnumerable<Evento> GetAll()
         {

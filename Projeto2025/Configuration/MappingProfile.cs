@@ -7,14 +7,17 @@ namespace Projeto2025.Configuration
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile(){
+        public MappingProfile()
+        {
             CreateMap<Cliente, ClienteDTO>().ReverseMap();
-            CreateMap<Evento, EventoDTO>().ReverseMap();
             CreateMap<FormaPagamento, FormaPagamentoDTO>().ReverseMap();
             CreateMap<Servico, ServicoDTO>().ReverseMap();
             CreateMap<TipoEvento, TipoEventoDTO>().ReverseMap();
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
-            CreateMap<Evento, EventoDTO>().ReverseMap();
+
+            CreateMap<EventoDTO, Evento>()
+                .ForMember(dest => dest.TipoEvento, opt => opt.Ignore())
+                .ReverseMap(); 
         }
     }
 }

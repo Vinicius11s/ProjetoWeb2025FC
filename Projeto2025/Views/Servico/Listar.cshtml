@@ -5,25 +5,26 @@
 
 <h1>Listar</h1>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Código</th>
-            <th scope="col">QtdeProfissionais</th>
-            <th scope="col">Alterar</th>
-            <th scope="col">Excluir</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="page-background">
+    <table class="table">
+        <thead>
             <tr>
-                <th scope="row">@item.id</th>
-                <td>@item.QtdeProfissionais</td>
-                <td><a class="btn btn-success">Alterar</a></td>
-                <td><a class="btn btn-danger">Excluir</a></td>
+                <th scope="col">Código</th>
+                <th scope="col">QtdeProfissionais</th>
+                <th scope="col">Alterar</th>
+                <th scope="col">Excluir</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.id</th>
+                    <td>@item.QtdeProfissionais</td>
+                    <td><a class="btn btn-success">Alterar</a></td>
+                    <td><a class="btn btn-danger">Excluir</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

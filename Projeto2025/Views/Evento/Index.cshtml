@@ -17,7 +17,7 @@
 
         <div class="form-group">
         <label asp-for="TipoEventoId"></label>
-        <select asp-for="TipoEventoId" class="form-control" asp-items="ViewBag.TiposEvento">
+        <select asp-for="TipoEventoId" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaEve">
                 <option value="">Selecione um tipo de evento</option>
             </select>
         <span class="alert-danger" asp-validation-for="TipoEventoId"></span>
@@ -43,7 +43,7 @@
 
     <div class="form-group">
         <label asp-for="idCliente"></label>
-        <select asp-for="idCliente" class="form-control" asp-items="ViewBag.Clientes">
+        <select asp-for="idCliente" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaCli">
             <option value="">Selecione o Cliente / Dono da Festa</option>
         </select>
         <span class="alert-danger" asp-validation-for="idCliente"></span>
@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label asp-for="idFormaPagamento"></label>
-        <select asp-for="idFormaPagamento" class="form-control" asp-items="ViewBag.formasPagamento">
+        <select asp-for="idFormaPagamento" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listForma">
             <option value="">Selecione a Forma de Pagamento</option>
         </select>
         <span class="alert-danger" asp-validation-for="idFormaPagamento"></span>

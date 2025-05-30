@@ -20,16 +20,16 @@ namespace Projeto2025.Controllers
             this.clienteModels = clienteModels;
             this.formaPagamentoModels = formaPagamentoModels;
         }
+            
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
             var listaEve = tipoEventoModels.GetAll();
             return listaEve.Select(e => new SelectListItem
             {
                 Value = e.id.ToString(),
-                Text = e.Descricao.ToString()
+                Text = e.Descricao
             });
         }
-
         public IEnumerable<SelectListItem> carregaListaClientes()
         {
             var listaCli = clienteModels.GetAll();
@@ -39,7 +39,6 @@ namespace Projeto2025.Controllers
                 Text = e.NomeCompleto.ToString()
             });
         }
-
         public IEnumerable<SelectListItem> carregaListaFormaPagamento()
         {
             var listaForma = formaPagamentoModels.GetAll();
@@ -118,10 +117,9 @@ namespace Projeto2025.Controllers
             }
             catch (Exception ex)
             {
-
                 ViewBag.classe = "alert-danger";
                 ViewBag.mensagem = "Erro ao salvar os dados! " +
-                    ex.Message;
+                    ex.Message + " | Inner: " + ex.InnerException?.Message;
             }
             return View("Index", dto);
         }
