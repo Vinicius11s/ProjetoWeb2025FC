@@ -13,7 +13,7 @@ namespace Projeto2025.DTOs
 
         [Display(Name = "Descrição")]
         [Required(ErrorMessage = "O Tipo Evento é obrigatório")]
-        public int TipoEventoId { get; set; }
+        public int idTipoEvento { get; set; }
 
 
         [Display(Name = "Data Evento")]

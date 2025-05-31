@@ -29,9 +29,10 @@ namespace Interfaces.Models
             return listaEveDTO;
         }
 
-        public ClienteDTO GetEvento(int id)
+        public EventoDTO GetEvento(int id)
         {
-            throw new NotImplementedException();
+            var evento = repository.GetEvento(id);
+            return mapper.Map<EventoDTO>(evento);
         }
 
         public EventoDTO save(EventoDTO dTO)

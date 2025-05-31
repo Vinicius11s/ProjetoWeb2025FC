@@ -12,6 +12,6 @@ namespace Interfaces.Models
         EventoDTO save(EventoDTO dTO);
         IEnumerable<EventoDTO> GetAll();
         void delete(int id);
-        ClienteDTO GetEvento(int id);
+        EventoDTO GetEvento(int id);
     }
 }

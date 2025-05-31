@@ -20,11 +20,11 @@ namespace Projeto2025.Controllers
             this.clienteModels = clienteModels;
             this.formaPagamentoModels = formaPagamentoModels;
         }
-            
+      
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
-            var listaEve = tipoEventoModels.GetAll();
-            return listaEve.Select(e => new SelectListItem
+            var listaTipoEve = tipoEventoModels.GetAll();
+            return listaTipoEve.Select(e => new SelectListItem
             {
                 Value = e.id.ToString(),
                 Text = e.Descricao
@@ -93,7 +93,9 @@ namespace Projeto2025.Controllers
         {
             var objDTO = this.models.GetEvento(id);
 
-            ViewBag.listaEve = carregaListaTipoEvento();
+            ViewBag.TiposEvento = carregaListaTipoEvento();
+            ViewBag.Clientes = carregaListaClientes();
+            ViewBag.formasPagamento = carregaListaFormaPagamento();
 
             return View("Index", objDTO);
         }
