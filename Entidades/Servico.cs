@@ -10,8 +10,10 @@ namespace Entidades
     {
         public int id { get; set; }
         public String NomeServico { get; set; } = String.Empty;
-        public String ValorServico { get; set; } = String.Empty ;
-        public String QtdeProfissionais { get; set; } = String.Empty;
-        public String Cardapio { get; set; } = String.Empty;
+        public Decimal ValorPorPessoa { get; set; }
+        public int? DuracaoHoras { get; set; }
+        public String Descricao { get; set; } = String.Empty;
+
+        public List<ItemVenda> Itens { get; set; }
     }
 }

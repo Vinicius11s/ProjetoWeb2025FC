@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using Infraestrutura.Contexto;
-using InfraEstrutura;
+using Infraestrutura;
 using Interfaces;
 using Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;

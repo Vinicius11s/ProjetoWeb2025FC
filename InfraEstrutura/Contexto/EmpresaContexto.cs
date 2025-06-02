@@ -26,12 +26,14 @@ namespace Infraestrutura.Contexto
         public DbSet<Usuario> usuarios { get; set; }
         public DbSet<Servico> servicos { get; set; }
         public DbSet<TipoEvento> tiposEventos { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
+        public DbSet<ItemVenda> ItensVenda { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Server Master = DESKTOP-VSA3AAA
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
+            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,12 +43,17 @@ namespace Infraestrutura.Contexto
                 entidade.HasKey(e => e.id);
                 entidade.Property(e => e.NomeCompleto).HasMaxLength(100);
                 entidade.Property(e => e.Endereco).HasMaxLength(200);
+                entidade.Property(e => e.DataNascimento).HasColumnType("datetime2(0)");
+                entidade.Property(e => e.DataCadastro).HasColumnType("datetime2(0)");
+                entidade.Property(e => e.DataNascimento).HasColumnType("date");
 
             });
 
             modelBuilder.Entity<Evento>(entidade =>
             {
                 entidade.HasKey(e => e.id);
+                entidade.Property(e => e.DataEvento).HasColumnType("datetime2(0)");
+
 
                 entidade.HasOne(e => e.Cliente)
                     .WithMany(c => c.Eventos)
@@ -72,7 +79,36 @@ namespace Infraestrutura.Contexto
                 entidade.HasKey(e => e.id);
             });
 
-            //Add-Migration AtualizandoBD -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
+            modelBuilder.Entity<ItemVenda>(entidade =>
+            {
+                entidade.HasKey(e => e.Id); // Chave primária
+
+                entidade.HasOne(e => e.Evento)
+                    .WithMany() 
+                    .HasForeignKey(e => e.idEvento)
+                    .HasConstraintName("FK_Evento_ItemVenda")
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entidade.HasOne(e => e.Servico)
+                    .WithMany() 
+                    .HasForeignKey(e => e.idServico)
+                    .HasConstraintName("FK_Servico_ItemVenda")
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                entidade.HasOne(e => e.Venda)
+                    .WithMany(v => v.Itens)
+                    .HasForeignKey(e => e.idVenda)
+                    .HasConstraintName("FK_Venda_ItemVenda")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+            modelBuilder.Entity<Venda>()
+            .HasOne(v => v.FormaPagamento)
+            .WithMany() 
+            .HasForeignKey(v => v.idFormaPagamento)
+            .OnDelete(DeleteBehavior.Restrict);
+
+
+            //Add-Migration DeleteColunas -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
         }
     }
 }

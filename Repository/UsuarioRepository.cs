@@ -1,6 +1,6 @@
 ﻿using Entidades;
 using Infraestrutura.Contexto;
-using InfraEstrutura;
+using Infraestrutura;
 using Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;

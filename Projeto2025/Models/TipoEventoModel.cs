@@ -29,7 +29,7 @@ namespace Projeto2025.Models
         }
         public TipoEventoDTO GetTipoEvento(int id)
         {
-            var tipoEvento = this.GetTipoEvento(id);
+            var tipoEvento = this.repository.GetTipoEvento(id);
             return mapper.Map<TipoEventoDTO>(tipoEvento);
         }
         public TipoEventoDTO save(TipoEventoDTO dTO)
@@ -42,7 +42,7 @@ namespace Projeto2025.Models
             }
             else
             {
-                repository.addTipoEvento(entidade);
+                repository.updateTipoEvento(entidade);
             }
 
             // Sempre remapeia o objeto atualizado e retorna

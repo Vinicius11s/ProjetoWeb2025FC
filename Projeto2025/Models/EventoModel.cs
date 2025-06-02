@@ -38,7 +38,16 @@ namespace Interfaces.Models
         public EventoDTO save(EventoDTO dTO)
         {
             Evento entidade = mapper.Map<Evento>(dTO);
-            repository.addEvento(entidade);
+
+            if (entidade.id > 0)
+            {
+                repository.updateEvento(entidade); // <- método de update
+            }
+            else
+            {
+                repository.addEvento(entidade); // <- método de insert
+            }
+
             dTO = mapper.Map<EventoDTO>(entidade);
             return dTO;
         }

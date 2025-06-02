@@ -84,9 +84,7 @@ namespace Projeto2025.Controllers
         }
         public IActionResult PreAlterar(int id)
         {
-            //controller vai pra model > repositorio e depois retorna
             var objDTO = this.models.GetFormaPagamento(id);
-            ViewBag.listaEve = carregaListaFormaPagamento();
             return View("Index", objDTO);
         }
     }

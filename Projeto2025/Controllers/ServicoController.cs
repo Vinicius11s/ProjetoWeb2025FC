@@ -50,5 +50,26 @@ namespace Projeto2025.Controllers
             }
             return View("Index", dto);
         }
+        public IActionResult Excluir(int id)
+        {
+            try
+            {
+                this.models.delete(id);
+                ViewBag.mensagem = "Exclusão efetuada com sucesso !";
+                ViewBag.classe = "alert-sucess";
+            }
+            catch (Exception)
+            {
+                ViewBag.mensagem = "Ops.. ocorreu um erro ao excluir o item";
+                ViewBag.classe = "alert-danger";
+            }
+            var lista = models.GetAll();
+            return View("Listar", lista);
+        }
+        public IActionResult PreAlterar(int id)
+        {
+            var objDTO = this.models.GetServico(id);
+            return View("Index", objDTO);
+        }
     }
 }

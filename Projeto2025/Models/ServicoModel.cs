@@ -16,35 +16,32 @@ namespace Projeto2025.Models
             this.repository = repository;
             this.mapper = mapper;
         }
-
         public void delete(int id)
         {
             this.repository.delete(id);
 
         }
-
-        public IEnumerable<ServicoDTO> getAll()
-        {
-            var listaServico = this.repository.GetAll();
-            var listaSerDTO =
-                mapper.Map<IEnumerable<ServicoDTO>>(listaServico);
-            return listaSerDTO;
-        }
-
         public IEnumerable<ServicoDTO> GetAll()
         {
-            return mapper.Map<IEnumerable<ServicoDTO>>(repository.GetAll());
-        }
-
+            return mapper.Map<IEnumerable<ServicoDTO>>(repository.GetAll()); ;
+        }  
         public ServicoDTO GetServico(int id)
         {
-            throw new NotImplementedException();
+            var servico = this.repository.GetServico(id);
+            return mapper.Map<ServicoDTO>(servico);
         }
-
         public ServicoDTO save(ServicoDTO dTO)
         {
             Servico entidade = mapper.Map<Servico>(dTO);
-            repository.addServico(entidade);
+            if (entidade.id == 0)
+            {
+                repository.addServico(entidade);
+            }
+            else
+            {
+                repository.updateServico(entidade);
+            }
+
             dTO = mapper.Map<ServicoDTO>(entidade);
             return dTO;
         }

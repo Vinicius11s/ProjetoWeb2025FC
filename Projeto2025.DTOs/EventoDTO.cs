@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Projeto2025.DTOs
 {
@@ -12,33 +13,43 @@ namespace Projeto2025.DTOs
         public int id { get; set; }
 
         [Display(Name = "Descrição")]
+        [Required(ErrorMessage = "A Descrição do Evento é obrigatória")]
+        public String Descricao { get; set; } = String.Empty;
+
+        [Display(Name = "Tipo Evento")]
         [Required(ErrorMessage = "O Tipo Evento é obrigatório")]
         public int idTipoEvento { get; set; }
 
+        [Display(Name = "Cliente / Dono da Festa")]
+        public int idCliente { get; set; }
 
         [Display(Name = "Data Evento")]
         [Required(ErrorMessage = "A Data do Evento é obrigatória")]
         public DateTime DataEvento { get; set; }
 
-
         [Display(Name = "Quantidade de Pessoas")]
         [Required(ErrorMessage = "A Quantidade de Pessoas é obrigatória")]
-        public int QtdePessoas { get; set; }
+        public int QuantidadePessoas { get; set; }
 
+        [Display(Name = "Local")]
+        //[Required(ErrorMessage = "O Local do Evento é obrigatório")]
+        public String Local { get; set; } = String.Empty;
 
         [Display(Name = "Escolha o Status do evento")]
         [Required(ErrorMessage = "o Status do evento é obrigatório")]
         public String Status { get; set; } = String.Empty;
 
+        [Display(Name = "Observações")]
+        public string? Observacoes { get; set; }
 
-        [Display(Name = "Cliente / Dono da Festa")]
-        //[Required(ErrorMessage = "O Cliente / Dono da Festa é obrigatório")]
-        public int idCliente { get; set; }
-
+        [Display(Name = "Valor total a receber")]
+        public Decimal ValorTotal { get; set; }
 
         [Display(Name = "Informe a Forma de Pagamento")]
-        //[Required(ErrorMessage = "A Forma de Pagamento é obrigatório")]
         public int idFormaPagamento { get; set; }
-        public String Descricao { get; set; } = String.Empty;
+
+        //public String Descricao { get; set; } = String.Empty;
+
+        public string TipoEventoDescricao { get; set; } = String.Empty;
     }
 }

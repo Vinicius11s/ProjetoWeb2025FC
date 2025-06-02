@@ -25,7 +25,7 @@ namespace Repository
             this.contexto.SaveChanges();
             return eve;
         }
-        public Evento updateEevnto(Evento evento)
+        public Evento updateEvento(Evento evento)
         {
             var eventoaux = contexto.Set<Evento>().Find(evento.id);
 
@@ -39,7 +39,7 @@ namespace Repository
         }
         public IEnumerable<Evento> GetAll()
         {
-            return this.contexto.Set<Evento>().ToList().OrderBy(e => e.id);
+            return contexto.eventos.Include(e => e.TipoEvento).ToList();
         }
         public Evento GetEvento(int id)
         {

@@ -35,6 +35,9 @@ builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
 builder.Services.AddScoped<IUsuarioModels, UsuarioModel>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
+builder.Services.AddScoped<IVendaModels, VendaModels>();
+builder.Services.AddScoped<IVendaRepository, VendaRepository>();
+
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 

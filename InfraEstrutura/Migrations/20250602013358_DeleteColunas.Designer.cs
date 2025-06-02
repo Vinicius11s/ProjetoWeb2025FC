@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraEstrutura.Migrations
 {
     [DbContext(typeof(EmpresaContexto))]
-    [Migration("20250409003326_AlteracaoPropriedadesCliente")]
-    partial class AlteracaoPropriedadesCliente
+    [Migration("20250602013358_DeleteColunas")]
+    partial class DeleteColunas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,12 +33,18 @@ namespace InfraEstrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime2(0)");
+
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -53,6 +59,9 @@ namespace InfraEstrutura.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Sexo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
@@ -72,21 +81,27 @@ namespace InfraEstrutura.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<DateTime>("DataEvento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
-                    b.Property<int>("QtdeAdultos")
-                        .HasColumnType("int");
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QtdeCriancas")
+                    b.Property<string>("Local")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuantidadePessoas")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ValorTotal")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("int");
+                    b.Property<decimal?>("ValorTotal")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("idCliente")
                         .HasColumnType("int");
@@ -116,42 +131,52 @@ namespace InfraEstrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int>("Credito")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Debito")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Dinheiro")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Pix")
-                        .HasColumnType("int");
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
                     b.ToTable("formasPagamento");
                 });
 
-            modelBuilder.Entity("Entidades.Login", b =>
+            modelBuilder.Entity("Entidades.ItemVenda", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
 
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Servicoid")
+                        .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.ToTable("logins");
+                    b.Property<int>("idEvento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idServico")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idVenda")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Servicoid");
+
+                    b.HasIndex("idEvento");
+
+                    b.HasIndex("idServico");
+
+                    b.HasIndex("idVenda");
+
+                    b.ToTable("ItensVenda");
                 });
 
             modelBuilder.Entity("Entidades.Servico", b =>
@@ -162,21 +187,19 @@ namespace InfraEstrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("Cardapio")
+                    b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DuracaoHoras")
+                        .HasColumnType("int");
 
                     b.Property<string>("NomeServico")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("QtdeProfissionais")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ValorServico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("ValorPorPessoa")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("id");
 
@@ -195,27 +218,55 @@ namespace InfraEstrutura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("id");
 
                     b.ToTable("tiposEventos");
                 });
 
-            modelBuilder.Entity("Entidades.TipoEventoServico", b =>
+            modelBuilder.Entity("Entidades.Usuario", b =>
                 {
-                    b.Property<int>("TipoEventoId")
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ServicoId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("usuarios");
+                });
+
+            modelBuilder.Entity("Entidades.Venda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasKey("TipoEventoId", "ServicoId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasIndex("ServicoId");
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("tiposEventosServicos");
+                    b.Property<int?>("idFormaPagamento")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idFormaPagamento");
+
+                    b.ToTable("Vendas");
                 });
 
             modelBuilder.Entity("Entidades.Evento", b =>
@@ -248,23 +299,48 @@ namespace InfraEstrutura.Migrations
                     b.Navigation("TipoEvento");
                 });
 
-            modelBuilder.Entity("Entidades.TipoEventoServico", b =>
+            modelBuilder.Entity("Entidades.ItemVenda", b =>
                 {
-                    b.HasOne("Entidades.Servico", "Servico")
-                        .WithMany("TipoEventoServicos")
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Entidades.Servico", null)
+                        .WithMany("Itens")
+                        .HasForeignKey("Servicoid");
 
-                    b.HasOne("Entidades.TipoEvento", "TipoEvento")
-                        .WithMany("TipoEventoServicos")
-                        .HasForeignKey("TipoEventoId")
+                    b.HasOne("Entidades.Evento", "Evento")
+                        .WithMany()
+                        .HasForeignKey("idEvento")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Evento_ItemVenda");
+
+                    b.HasOne("Entidades.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("idServico")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Servico_ItemVenda");
+
+                    b.HasOne("Entidades.Venda", "Venda")
+                        .WithMany("Itens")
+                        .HasForeignKey("idVenda")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Venda_ItemVenda");
+
+                    b.Navigation("Evento");
 
                     b.Navigation("Servico");
 
-                    b.Navigation("TipoEvento");
+                    b.Navigation("Venda");
+                });
+
+            modelBuilder.Entity("Entidades.Venda", b =>
+                {
+                    b.HasOne("Entidades.FormaPagamento", "FormaPagamento")
+                        .WithMany()
+                        .HasForeignKey("idFormaPagamento")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("FormaPagamento");
                 });
 
             modelBuilder.Entity("Entidades.Cliente", b =>
@@ -279,14 +355,17 @@ namespace InfraEstrutura.Migrations
 
             modelBuilder.Entity("Entidades.Servico", b =>
                 {
-                    b.Navigation("TipoEventoServicos");
+                    b.Navigation("Itens");
                 });
 
             modelBuilder.Entity("Entidades.TipoEvento", b =>
                 {
                     b.Navigation("Eventos");
+                });
 
-                    b.Navigation("TipoEventoServicos");
+            modelBuilder.Entity("Entidades.Venda", b =>
+                {
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }

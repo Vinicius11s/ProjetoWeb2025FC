@@ -10,7 +10,7 @@ namespace Interfaces.Repository
     public interface IEventoRepository
     {
         Evento addEvento (Evento servico);
-        Evento updateEevnto (Evento servico);
+        Evento updateEvento(Evento servico);
         IEnumerable<Evento> GetAll();
         Evento GetEvento(int id);
         void delete(int id);

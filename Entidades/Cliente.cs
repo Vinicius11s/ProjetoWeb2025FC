@@ -13,8 +13,12 @@ namespace Entidades
         public String Cpf { get; set; } = String.Empty;
         public String Endereco { get; set; } = String.Empty;
         public DateTime DataNascimento { get; set; }
+        public string? Sexo { get; set; }
         public String Telefone { get; set; } = String.Empty;
         public String Email { get; set; } = String.Empty;
+
+        public bool Ativo { get; set; } = true;
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         public virtual ICollection<Evento> Eventos { get; set; } = new HashSet<Evento>();
 

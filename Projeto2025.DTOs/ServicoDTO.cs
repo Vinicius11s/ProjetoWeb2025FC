@@ -15,16 +15,16 @@ namespace Projeto2025.DTOs
         [Required(ErrorMessage = "O Nome do Serviço é obrigatório")]
         public String NomeServico { get; set; } = String.Empty;
 
-        [Display(Name = "Valor do Serviço")]
-        [Required(ErrorMessage = "O Valor do Serviço é obrigatório")]
-        public String ValorServico { get; set; } = String.Empty;
+        [Display(Name = "Valor por Pessoa")]
+        [Required(ErrorMessage = "O Valor por pessoa é obrigatório")]
+        public String ValorPorPessoa { get; set; } = String.Empty;
 
-        [Display(Name = "Quantidade de Profissionais")]
-        [Required(ErrorMessage = "A Quantidade de Profissionais é obrigatória")]
-        public String QtdeProfissionais { get; set; } = String.Empty;
+        [Display(Name = "Duração Máxima (Horas)")]
+        [Required(ErrorMessage = "A Duração é obrigatória")]
+        public int? DuracaoHoras { get; set; }
 
         [Display(Name = "Descrição")]
-        [Required(ErrorMessage = "O Tipo Evento é obrigatório")]
-        public String Cardapio { get; set; } = String.Empty;
+        public String Descricao { get; set; } = String.Empty;
+
     }
 }

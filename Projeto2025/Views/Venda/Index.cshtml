@@ -1,0 +1,205 @@
+﻿@model Projeto2025.DTOs.VendaDTO
+
+@{
+    ViewData["Title"] = "Venda";
+}
+
+<h1>Venda</h1>
+
+<form asp-controller="Venda" asp-action="Salvar" method="post">
+
+    <div class="form-group">
+        <label>Data</label>
+        <input type="date" asp-for="Data" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Forma de Pagamento</label>
+        <select asp-for="idFormaPagamento" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaPagamentos">
+            <option value="">Escolha a forma de pagamento</option>
+        </select>
+    </div>
+
+    <div class="container-fluid mt-3" id="lista" style="border:solid 1px #333;border-radius:5px">
+        <h2>Eventos da Venda</h2>
+
+        <div class="form-group mt-3 row mb-3 produto">
+            <div class="col-5">
+                <label>Evento</label>
+                <select asp-for="Itens[0].idEvento" class="form-control evento-select" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaEventos">
+                    <option value="">Escolha o Evento</option>
+                </select>
+            </div>
+            <div class="col-5">
+                <label>Serviço</label>
+                <select asp-for="Itens[0].idServico" class="form-control servico-select" asp-items="@(IEnumerable<SelectListItem>)ViewBag.listaServicos">
+                    <option value="">Escolha o Serviço</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label>Valor do Evento</label>
+                <input type="text" class="form-control valor-evento" readonly />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-2">
+        <button type="button" onclick="Adicionar()" class="btn btn-info">Adicionar Evento</button>
+    </div>
+
+    <div class="form-group mt-3">
+        <span class="@ViewBag.classe">@ViewBag.mensagem</span>
+    </div>
+
+    <div class="form-group d-flex align-items-center gap-3">
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <span><strong>Total: R$ <span id="valor-total">0,00</span></strong></span>
+    </div>
+
+</form>
+
+@section Scripts {
+    <script>
+        let contador = 1;
+
+        const eventos = @Html.Raw(Json.Serialize(ViewBag.listaEventos)); // { value, text }
+        const servicos = @Html.Raw(Json.Serialize(ViewBag.listaServicos)); // { value, text }
+        const servicosComValores = @Html.Raw(Json.Serialize(ViewBag.servicosComValores)); // { id, valor }
+
+        // Supondo que a quantidade de pessoas vem do evento selecionado, vamos supor que temos essa info no ViewBag.eventosComQtdPessoas
+        const eventosComQtdPessoas = @Html.Raw(Json.Serialize(ViewBag.eventosComQtdPessoas)); // { id, quantidadePessoas }
+
+                function getQuantidadePessoas(eventoId) {
+            const ev = eventosComQtdPessoas.find(e => e.id == eventoId);
+            return ev ? parseInt(ev.quantidadePessoas) : 0;
+        }
+
+        function getValorPorPessoa(servicoId) {
+            const s = servicosComValores.find(s => s.id == servicoId);
+            return s ? parseFloat(s.valor) : 0;
+        }
+
+        function atualizarValorEvento(div) {
+            const selectEvento = div.querySelector('.evento-select');
+            const selectServico = div.querySelector('.servico-select');
+            const inputValorEvento = div.querySelector('.valor-evento');
+
+            const eventoId = selectEvento.value;
+            const servicoId = selectServico.value;
+
+            if (eventoId && servicoId) {
+                const qtdPessoas = getQuantidadePessoas(eventoId);
+                const valorUnitario = getValorPorPessoa(servicoId);
+                const valorTotal = qtdPessoas * valorUnitario;
+                inputValorEvento.value = valorTotal.toFixed(2);
+            } else {
+                inputValorEvento.value = "0.00";
+            }
+            atualizarTotal();
+        }
+
+        function atualizarTotal() {
+            let total = 0;
+            document.querySelectorAll('.produto').forEach(div => {
+                const val = parseFloat(div.querySelector('.valor-evento').value.replace(',', '.')) || 0;
+                total += val;
+            });
+            document.getElementById('valor-total').innerText = total.toFixed(2);
+        }
+
+        function Adicionar() {
+            const lista = document.getElementById("lista");
+            const div = document.createElement("div");
+            div.className = "form-group mt-3 row mb-3 produto";
+
+            // Evento
+            const divEvento = document.createElement("div");
+            divEvento.className = "col-5";
+            const labelEvento = document.createElement("label");
+            labelEvento.innerText = "Evento";
+            const selectEvento = document.createElement("select");
+            selectEvento.name = `Itens[${contador}].idEvento`;
+            selectEvento.className = "form-control evento-select";
+            const optE = document.createElement("option");
+            optE.value = "";
+            optE.text = "Escolha o Evento";
+            selectEvento.appendChild(optE);
+            eventos.forEach(e => {
+                const opt = document.createElement("option");
+                opt.value = e.value;
+                opt.text = e.text;
+                selectEvento.appendChild(opt);
+            });
+            divEvento.appendChild(labelEvento);
+            divEvento.appendChild(selectEvento);
+
+            // Serviço
+            const divServico = document.createElement("div");
+            divServico.className = "col-5";
+            const labelServico = document.createElement("label");
+            labelServico.innerText = "Serviço";
+            const selectServico = document.createElement("select");
+            selectServico.name = `Itens[${contador}].idServico`;
+            selectServico.className = "form-control servico-select";
+            const optS = document.createElement("option");
+            optS.value = "";
+            optS.text = "Escolha o Serviço";
+            selectServico.appendChild(optS);
+            servicos.forEach(s => {
+                const opt = document.createElement("option");
+                opt.value = s.value;
+                opt.text = s.text;
+                selectServico.appendChild(opt);
+            });
+            divServico.appendChild(labelServico);
+            divServico.appendChild(selectServico);
+
+            // Valor do Evento (só leitura)
+            const divValor = document.createElement("div");
+            divValor.className = "col-2";
+            const labelValor = document.createElement("label");
+            labelValor.innerText = "Valor do Evento";
+            const inputValor = document.createElement("input");
+            inputValor.type = "text";
+            inputValor.className = "form-control valor-evento";
+            inputValor.readOnly = true;
+            divValor.appendChild(labelValor);
+            divValor.appendChild(inputValor);
+
+            // Botão Excluir
+            const divBtn = document.createElement("div");
+            divBtn.className = "col-12 mt-2";
+            const btnDel = document.createElement("button");
+            btnDel.type = "button";
+            btnDel.className = "btn btn-danger";
+            btnDel.innerText = "Excluir";
+            btnDel.onclick = function () {
+                div.remove();
+                atualizarTotal();
+            };
+            divBtn.appendChild(btnDel);
+
+            div.appendChild(divEvento);
+            div.appendChild(divServico);
+            div.appendChild(divValor);
+            div.appendChild(divBtn);
+            lista.appendChild(div);
+
+            contador++;
+
+            // Eventos para atualizar valor quando mudar seleção
+            selectEvento.addEventListener('change', () => atualizarValorEvento(div));
+            selectServico.addEventListener('change', () => atualizarValorEvento(div));
+        }
+
+        // Inicializa os eventos já na página
+        document.querySelectorAll('.produto').forEach(div => {
+            div.querySelector('.evento-select').addEventListener('change', () => atualizarValorEvento(div));
+            div.querySelector('.servico-select').addEventListener('change', () => atualizarValorEvento(div));
+            atualizarValorEvento(div);
+        });
+
+        // Atualiza total inicial
+        atualizarTotal();
+    </script>
+}

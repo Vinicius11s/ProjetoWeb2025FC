@@ -10,38 +10,142 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/login.css" />
-
     <title>Login</title>
-</head>
-<body class="login-dark d-flex justify-content-center align-items-center">
-    <div class="login-card p-4 rounded shadow">
-        <h4 class="text-center mb-4 text-light">Login</h4>
 
-        <form asp-controller="Usuario" asp-action="Logar" method="post">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+    <style>
+        body, html {
+            height: 100%;
+            background: linear-gradient(135deg, #040404, #57544f);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-dark {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .login-card {
+            background: rgba(4, 4, 4, 0.85); /* usando #040404 com opacidade */
+            padding: 40px 30px 30px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(116, 116, 116, 0.5); /* #747474 sombra */
+            width: 100%;
+            max-width: 400px;
+            color: #ecd08e; /* cor clara do logo */
+            text-align: center;
+        }
+
+            .login-card img.logo {
+                max-width: 120px;
+                margin-bottom: 25px;
+                filter: drop-shadow(0 0 6px #ecd08e);
+            }
+
+            .login-card h4 {
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                margin-bottom: 30px;
+                color: #ecd08e;
+            }
+
+        .form-control.input-dark {
+            background-color: #57544f;
+            border: 1px solid #7c7c7a;
+            color: #ecd08e;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+            .form-control.input-dark::placeholder {
+                color: #747474;
+            }
+
+            .form-control.input-dark:focus {
+                background-color: #7c7c7a;
+                border-color: #ecd08e;
+                color: #040404;
+                box-shadow: 0 0 8px #ecd08e;
+            }
+
+        .btn-dark {
+            background: #ecd08e;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            padding: 12px 0;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            color: #040404;
+        }
+
+            .btn-dark:hover, .btn-dark:focus {
+                background: #ecd08e;
+                color: #040404;
+            }
+
+        .text-center a {
+            color: #747474;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .text-center a:hover {
+                color: #ecd08e;
+                text-decoration: underline;
+            }
+
+        .alert-warning {
+            background-color: #7c7c7a;
+            border-color: #57544f;
+            color: #ecd08e;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="login-dark">
+
+    <div class="login-card shadow-lg">
+        <img src="~/logoFogo.jpg" alt="Logo Fogo" class="logo" />
+
+        <h4>Login</h4>
+
+        <form asp-controller="Usuario" asp-action="Logar" method="post" novalidate>
             @if (!string.IsNullOrEmpty(ViewBag.mensagem as string))
             {
-                <div class="alert alert-warning">@ViewBag.mensagem</div>
+                <div class="alert alert-warning" role="alert">
+                    @ViewBag.mensagem
+                </div>
             }
 
             <div class="form-group">
-                <input type="email" asp-for="email" class="form-control input-dark" placeholder="Email" />
+                <input type="email" asp-for="email" class="form-control input-dark" placeholder="Email" required />
+                <span class="text-danger" asp-validation-for="email"></span>
             </div>
 
             <div class="form-group">
-                <input type="password" asp-for="password" class="form-control input-dark" placeholder="Senha" />
+                <input type="password" asp-for="password" class="form-control input-dark" placeholder="Senha" required />
+                <span class="text-danger" asp-validation-for="password"></span>
             </div>
 
-            <button type="submit" class="btn btn-dark btn-block">Entrar</button>
+            <button type="submit" class="btn btn-dark mt-3">Entrar</button>
 
-            <div class="text-center mt-3">
-                <a asp-action="Index" asp-controller="Usuario" class="text-secondary">Criar nova conta</a>
+            <div class="text-center mt-4">
+                <a asp-action="Index" asp-controller="Usuario">Criar nova conta</a>
             </div>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
-    
 </html>

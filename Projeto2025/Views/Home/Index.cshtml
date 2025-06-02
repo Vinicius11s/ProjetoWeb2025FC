@@ -1,28 +1,94 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout"; // Garanta que o layout principal está aplicado
 }
 
+<style>
+    body {
+        background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+        color: #f9f1e7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .brand-header {
+        text-align: center;
+        padding: 60px 20px 30px;
+    }
+
+        .brand-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ecd08e;
+            text-shadow: 1px 1px 5px #000;
+        }
+
+        .brand-header p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-top: 10px;
+        }
+
+    .event-section {
+        padding: 40px 15px;
+    }
+
+    .event-card {
+        background-color: #2e2e2e;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 206, 103, 0.4);
+        }
+
+        .event-card img {
+            border-radius: 12px;
+            max-height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .event-card p {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #ecd08e;
+        }
+
+    .emoji {
+        font-size: 1.4rem;
+        margin-right: 4px;
+    }
+</style>
+
 <div class="brand-header">
-    <img src="~/logoFogo.jpg" alt="Logo da Marca Churrasco" />
     <h1>Sistema Gerenciador de Eventos de Churrasco</h1>
     <p>Organize, promova e saboreie eventos como nunca!</p>
 </div>
 
-<div class="event-section text-center container">
+<div class="event-section container">
     <div class="row">
         <div class="col-md-6">
             <div class="event-card">
                 <img src="~/costelaChao.jpg" alt="Costela de Chão" class="img-fluid" />
-                <p class="mt-3">🔥 Evento: Costela de Chão <br />📍 Local: Presidente Epitácio - SP</p>
+                <p>
+                    <span class="emoji">🔥</span><strong>Evento:</strong> Costela de Chão<br />
+                    <span class="emoji">📍</span><strong>Local:</strong> Presidente Epitácio - SP
+                </p>
             </div>
         </div>
         <div class="col-md-6">
             <div class="event-card">
                 <img src="~/churrascoVaralFrutas.jpg" alt="Churrasco com Varal de Frutas" class="img-fluid" />
-                <p class="mt-3">🥩 Evento: Churrasco com Varal de Frutas <br />📍 Local: Ribeirão Preto - SP</p>
+                <p>
+                    <span class="emoji">🥩</span><strong>Evento:</strong> Churrasco com Varal de Frutas<br />
+                    <span class="emoji">📍</span><strong>Local:</strong> Ribeirão Preto - SP
+                </p>
             </div>
         </div>
     </div>
-
-    <p class="mt-4">Confira como <a href="https://learn.microsoft.com/aspnet/core" target="_blank">construir aplicações web com ASP.NET Core</a>.</p>
 </div>

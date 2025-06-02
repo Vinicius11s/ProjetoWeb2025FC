@@ -14,10 +14,16 @@ namespace Projeto2025.Configuration
             CreateMap<Servico, ServicoDTO>().ReverseMap();
             CreateMap<TipoEvento, TipoEventoDTO>().ReverseMap();
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
+            CreateMap<VendaDTO, Venda>().ReverseMap();
+            CreateMap<ItemVendaDTO, ItemVenda>().ReverseMap();
 
             CreateMap<EventoDTO, Evento>()
                 .ForMember(dest => dest.TipoEvento, opt => opt.Ignore())
-                .ReverseMap(); 
+                .ReverseMap();
+
+            CreateMap<Evento, EventoDTO>()
+            .ForMember(dest => dest.TipoEventoDescricao,
+               opt => opt.MapFrom(src => src.TipoEvento.Descricao));
         }
     }
 }

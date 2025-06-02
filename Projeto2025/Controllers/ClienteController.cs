@@ -21,10 +21,11 @@ public class ClienteController : Controller
     public IEnumerable<SelectListItem> carregaListaEvento()
     {
         var listaEve = eventoModels.GetAll();
+
         return listaEve.Select(e => new SelectListItem
         {
             Value = e.id.ToString(),
-            Text = e.DataEvento.ToString()
+            Text = e.Descricao
         });
     }  
 

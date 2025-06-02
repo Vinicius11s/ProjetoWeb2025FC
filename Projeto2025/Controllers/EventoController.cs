@@ -72,7 +72,6 @@ namespace Projeto2025.Controllers
         }
         public ActionResult Excluir(int id)
         {
-
             try
             {
                 this.models.delete(id);
@@ -106,7 +105,6 @@ namespace Projeto2025.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // executar model (salvar)
                     dto = this.models.save(dto);
                     ViewBag.classe = "alert-success";
                     ViewBag.mensagem = "Dados salvos com sucesso!";
@@ -123,6 +121,12 @@ namespace Projeto2025.Controllers
                 ViewBag.mensagem = "Erro ao salvar os dados! " +
                     ex.Message + " | Inner: " + ex.InnerException?.Message;
             }
+
+            // ✅ Garantir que o ViewBag está preenchido mesmo após POST
+            ViewBag.TiposEvento = carregaListaTipoEvento();
+            ViewBag.Clientes = carregaListaClientes();
+            ViewBag.formasPagamento = carregaListaFormaPagamento();
+
             return View("Index", dto);
         }
     }

@@ -1,5 +1,4 @@
 ﻿@model Projeto2025.DTOs.FormaPagamentoDTO
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,9 +6,8 @@
 <h1>Cadastro Forma de Pagamento</h1>
 
 
-<div class="col-3">
-    <a asp-action="Listar" asp-controller="FormaPagamento"
-       class="btn btn-info">
+<div class="col-3 mb-3">
+    <a asp-action="Listar" asp-controller="FormaPagamento" class="btn btn-info">
         Listar
     </a>
 </div>
@@ -23,17 +21,19 @@
         <span class="alert-danger" asp-validation-for="Descricao">
         </span>
     </div>
+    @if (!string.IsNullOrEmpty(ViewBag.mensagem))
+    {
+        <div class="alert @ViewBag.classe mt-3" role="alert">
+            @ViewBag.mensagem
+        </div>
+    }
 
-    <div class="form-group row mt-3">
-        <div class="col-3">
-            <button type="submit" class="btn btn-success">
-                Salvar
-            </button>
-        </div>
-        <div class="col-3">
-            <a asp-action="Index" asp-controller="FormaPagamento" class="btn btn-success">
-                Novo
-            </a>
-        </div>
+    <div class="form-group mt-3 d-flex">
+        <button type="submit" class="btn btn-success me-2">
+            Salvar
+        </button>
+        <a asp-action="Index" asp-controller="FormaPagamento" class="btn btn-primary">
+            Novo
+        </a>
     </div>
 </form>

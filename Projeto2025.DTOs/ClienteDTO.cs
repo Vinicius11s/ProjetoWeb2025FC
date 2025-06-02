@@ -27,6 +27,9 @@ namespace Projeto2025.DTOs
         [Required(ErrorMessage = "A Data de Nascimento é obrigatória")]
         public DateTime DataNascimento { get; set; }
 
+        [Display(Name = "Sexo")]
+        public String Sexo { get; set; } = String.Empty;
+
         [Display(Name = "Telefone")]
         [Required(ErrorMessage = "O Telefone é obrigatório")]
         public String Telefone { get; set; } = String.Empty;
@@ -35,6 +38,8 @@ namespace Projeto2025.DTOs
         [Required(ErrorMessage = "O Email é obrigatório")]
         public String Email { get; set; } = String.Empty;
 
+        public bool Ativo { get; set; } = true;
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         public int? idEvento { get; set; }
         public virtual EventoDTO? evento { get; set; }

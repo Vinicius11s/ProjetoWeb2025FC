@@ -12,12 +12,10 @@ namespace Repository
     public class TipoEventoRepository : ITipoEventoRepository
     {
         private EmpresaContexto contexto;
-
         public TipoEventoRepository(EmpresaContexto contexto)
         {
             this.contexto = contexto;
         }
-
         public TipoEvento addTipoEvento(TipoEvento tipoEvento)
         {
             this.contexto.Set<TipoEvento>().Add(tipoEvento);
@@ -29,8 +27,7 @@ namespace Repository
             this.contexto.Set<TipoEvento>().Update(tipoEvento);
             this.contexto.SaveChanges();
             return tipoEvento;
-        }
-        
+        }    
         public IEnumerable<TipoEvento> GetAll()
         {
             return this.contexto.Set<TipoEvento>().ToList().OrderBy(p => p.Descricao);
@@ -39,7 +36,6 @@ namespace Repository
         {
             return this.contexto.Set<TipoEvento>().Find(id);
         }
-
         public void delete(int id)
         {
             var obj = this.contexto.Set<TipoEvento>().Find(id);

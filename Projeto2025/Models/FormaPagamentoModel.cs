@@ -36,8 +36,6 @@ namespace Projeto2025.Models
             dTO = mapper.Map<FormaPagamentoDTO>(entidade);
             return dTO;
         }
-
-
         public void delete(int id)
         {
             this.repository.delete(id);
@@ -45,8 +43,9 @@ namespace Projeto2025.Models
         }
         public FormaPagamentoDTO GetFormaPagamento(int id)
         {
-            var cliente = this.GetFormaPagamento(id);
-            return mapper.Map<FormaPagamentoDTO>(cliente);
+            var forma = this.repository.GetFormaPagamento(id);
+            return mapper.Map<FormaPagamentoDTO>(forma);
+           
         }
     }
 }

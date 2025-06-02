@@ -6,6 +6,11 @@
 
 <h1>Tipo Evento</h1>
 
+<div class="col-3 mb-3">
+    <a asp-action="Listar" asp-controller="TipoEvento" class="btn btn-info">
+        Listar
+    </a>
+</div>
 
 <form asp-action="Salvar" asp-controller="TipoEvento" method="post">
     <input type="hidden" asp-for="id" />
@@ -18,14 +23,6 @@
         </span>
     </div>
 
-
-    <div class="form-group">
-        <label asp-for="Valor"></label>
-        <input type="text" asp-for="Valor" class="form-control" />
-        <span class="alert-danger" asp-validation-for="Valor">
-        </span>
-    </div>
-
     <div>
         <span class="@ViewBag.classe">@ViewBag.mensagem</span>
     </div>
@@ -35,6 +32,10 @@
         <button type="submit" class="btn btn-success">
             Salvar
         </button>
+
+        <a asp-action="Index" asp-controller="TipoEvento" class="btn btn-primary">
+            Novo
+        </a>
     </div>
 
 
