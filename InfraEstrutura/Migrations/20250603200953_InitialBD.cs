@@ -123,7 +123,6 @@ namespace InfraEstrutura.Migrations
                     Local = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Observacoes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     idFormaPagamento = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -155,8 +154,8 @@ namespace InfraEstrutura.Migrations
                     idVenda = table.Column<int>(type: "int", nullable: false),
                     idEvento = table.Column<int>(type: "int", nullable: false),
                     idServico = table.Column<int>(type: "int", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    QuantidadePessoas = table.Column<int>(type: "int", nullable: false),
                     Servicoid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

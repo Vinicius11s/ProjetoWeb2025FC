@@ -61,12 +61,6 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="ValorTotal"></label>
-        <input type="text" asp-for="ValorTotal" class="form-control" />
-        <span class="alert-danger" asp-validation-for="ValorTotal"></span>
-    </div>
-
-    <div class="form-group">
         <label asp-for="idCliente"></label>
         <select asp-for="idCliente" class="form-control" asp-items="@(IEnumerable<SelectListItem>)ViewBag.Clientes">
             <option value="">Selecione o Cliente / Dono da Festa</option>

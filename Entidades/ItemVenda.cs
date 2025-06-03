@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,13 @@ namespace Entidades
         public int idEvento { get; set; }
         public virtual Evento? Evento { get; set; }
 
+        [ForeignKey("idServico")]
         public int idServico { get; set; }
         public virtual Servico? Servico { get; set; }
 
-        public decimal Valor { get; set; }
-        public int Quantidade { get; set; }
+        public decimal ValorUnitario { get; set; } 
+        public int QuantidadePessoas { get; set; } 
+
+        public decimal ValorTotal => ValorUnitario * QuantidadePessoas;
     }
 }

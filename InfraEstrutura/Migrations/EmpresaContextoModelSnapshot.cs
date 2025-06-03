@@ -97,9 +97,6 @@ namespace InfraEstrutura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("ValorTotal")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("idCliente")
                         .HasColumnType("int");
 
@@ -145,13 +142,13 @@ namespace InfraEstrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Quantidade")
+                    b.Property<int>("QuantidadePessoas")
                         .HasColumnType("int");
 
                     b.Property<int?>("Servicoid")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Valor")
+                    b.Property<decimal>("ValorUnitario")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("idEvento")

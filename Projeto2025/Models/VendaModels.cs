@@ -13,13 +13,15 @@ namespace Projeto2025.Models
         private IVendaRepository repository;
         private IMapper mapper;
         private IServicoRepository servicoRepository;
+        private IEventoRepository eventoRepository;
 
         public VendaModels(IVendaRepository repository, IMapper mapper,
-            IServicoRepository servicoRepository)
+            IServicoRepository servicoRepository, IEventoRepository eventoRepository)
         {
             this.repository = repository;
             this.mapper = mapper;
             this.servicoRepository = servicoRepository;
+            this.eventoRepository = eventoRepository;
         }
 
         public IEnumerable<VendaDTO> getAll()
@@ -31,15 +33,19 @@ namespace Projeto2025.Models
 
         public VendaDTO save(VendaDTO dTO)
         {
-            //obter o valor do produto
             foreach (var item in dTO.Itens)
             {
-                item.PrecoUnitario = 
-                    servicoRepository.GetServico(item.idServico).ValorPorPessoa;
+                var servico = servicoRepository.GetServico(item.idServico);
+                var evento = eventoRepository.GetEvento(item.idEvento);
+
+                item.QuantidadePessoas = evento.QuantidadePessoas;
+                item.ValorUnitario = servico.ValorPorPessoa;
             }
+
             var venda = mapper.Map<Venda>(dTO);
-            venda= this.repository.add(venda);
+            venda = this.repository.add(venda);
             return mapper.Map<VendaDTO>(venda);
         }
+
     }
 }

@@ -24,6 +24,9 @@ namespace Projeto2025.Configuration
             CreateMap<Evento, EventoDTO>()
             .ForMember(dest => dest.TipoEventoDescricao,
                opt => opt.MapFrom(src => src.TipoEvento.Descricao));
+
+            CreateMap<ItemVendaDTO, ItemVenda>()
+            .ForMember(dest => dest.ValorTotal, opt => opt.Ignore());
         }
     }
 }

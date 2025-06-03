@@ -72,7 +72,6 @@ namespace Projeto2025.Controllers
 
             ViewBag.listaPagamentos = carregaListaFormaPagamento();
 
-            // 🔽 ViewBags extras para o JS calcular automaticamente
             ViewBag.servicosComValores = servicos.Select(s => new { id = s.id, valor = s.ValorPorPessoa });
             ViewBag.eventosComQtdPessoas = eventos.Select(e => new { id = e.id, quantidadePessoas = e.QuantidadePessoas });
 

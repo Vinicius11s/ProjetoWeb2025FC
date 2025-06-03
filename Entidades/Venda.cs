@@ -8,16 +8,16 @@ namespace Entidades
 {
     public class Venda
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         public DateTime Data { get; set; } = DateTime.Now;
 
-        public int? idFormaPagamento { get; set; }  
+        public int? idFormaPagamento { get; set; }
         public virtual FormaPagamento? FormaPagamento { get; set; }
 
-        public virtual List<ItemVenda> Itens { get; set; } = new List<ItemVenda>();
+        public virtual List<ItemVenda> Itens { get; set; } = new();
 
-        public decimal Total => Itens.Sum(i => i.Quantidade * i.Valor);
+        public decimal Total => Itens.Sum(i => i.ValorTotal);
 
     }
 }

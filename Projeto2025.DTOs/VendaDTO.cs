@@ -13,7 +13,7 @@ namespace Projeto2025.DTOs
 
         public List<ItemVendaDTO> Itens { get; set; } = new List<ItemVendaDTO>();
 
-        public decimal Total => Itens.Sum(i => i.Subtotal);
+        public decimal Total => Itens.Sum(i => i.ValorTotal);
 
         public int? idFormaPagamento { get; set; }
         public virtual FormaPagamentoDTO? forma { get; set; }

@@ -14,9 +14,9 @@ namespace Projeto2025.DTOs
         public int idServico { get; set; }
         public string? ServicoDescricao { get; set; }
 
-        public decimal PrecoUnitario { get; set; }
-        public int Quantidade { get; set; }  
+        public decimal ValorUnitario { get; set; }
+        public int QuantidadePessoas { get; set; }
 
-        public decimal Subtotal => Quantidade * PrecoUnitario;
+        public decimal ValorTotal => ValorUnitario * QuantidadePessoas;
     }
 }
