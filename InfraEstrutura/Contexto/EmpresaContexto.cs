@@ -33,7 +33,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-VSA3AAA
             //Server Toledo = LAB10-12
-            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-VSA3AAA;
                 DataBase=dbEmpresa2025(2);integrated security=true;TrustServerCertificate=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -108,7 +108,7 @@ namespace Infraestrutura.Contexto
             .OnDelete(DeleteBehavior.Restrict);
 
 
-            //Add-Migration DeleteColunas -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
+            //Add-Migration InitialBD -Context InfraEstrutura.Contexto.EmpresaContexto -Project InfraEstrutura
         }
     }
 }

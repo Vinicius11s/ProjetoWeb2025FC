@@ -20,12 +20,12 @@ namespace InfraEstrutura.Migrations
                     NomeCompleto = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "date", nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2(0)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,16 +96,17 @@ namespace InfraEstrutura.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FormaPagamentoId = table.Column<int>(type: "int", nullable: true)
+                    idFormaPagamento = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vendas_formasPagamento_FormaPagamentoId",
-                        column: x => x.FormaPagamentoId,
+                        name: "FK_Vendas_formasPagamento_idFormaPagamento",
+                        column: x => x.idFormaPagamento,
                         principalTable: "formasPagamento",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +118,7 @@ namespace InfraEstrutura.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     idTipoEvento = table.Column<int>(type: "int", nullable: false),
                     idCliente = table.Column<int>(type: "int", nullable: false),
-                    DataEvento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataEvento = table.Column<DateTime>(type: "datetime2(0)", nullable: false),
                     QuantidadePessoas = table.Column<int>(type: "int", nullable: false),
                     Local = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -153,7 +154,6 @@ namespace InfraEstrutura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     idVenda = table.Column<int>(type: "int", nullable: false),
                     idEvento = table.Column<int>(type: "int", nullable: false),
-                    Eventoid = table.Column<int>(type: "int", nullable: true),
                     idServico = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
@@ -163,8 +163,8 @@ namespace InfraEstrutura.Migrations
                 {
                     table.PrimaryKey("PK_ItensVenda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ItensVenda_eventos_Eventoid",
-                        column: x => x.Eventoid,
+                        name: "FK_Evento_ItemVenda",
+                        column: x => x.idEvento,
                         principalTable: "eventos",
                         principalColumn: "id");
                     table.ForeignKey(
@@ -201,9 +201,9 @@ namespace InfraEstrutura.Migrations
                 column: "idTipoEvento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItensVenda_Eventoid",
+                name: "IX_ItensVenda_idEvento",
                 table: "ItensVenda",
-                column: "Eventoid");
+                column: "idEvento");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItensVenda_idServico",
@@ -221,9 +221,9 @@ namespace InfraEstrutura.Migrations
                 column: "Servicoid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendas_FormaPagamentoId",
+                name: "IX_Vendas_idFormaPagamento",
                 table: "Vendas",
-                column: "FormaPagamentoId");
+                column: "idFormaPagamento");
         }
 
         /// <inheritdoc />

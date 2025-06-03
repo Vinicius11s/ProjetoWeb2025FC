@@ -16,7 +16,7 @@ namespace Projeto2025.Controllers
             this.models = models;
             this.eventoModels = eventoModels;
         }
-
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
             var listaTipoEve = eventoModels.GetAll();
@@ -26,6 +26,7 @@ namespace Projeto2025.Controllers
                 Text = e.DataEvento.ToString()
             });
         }
+        [SessionAuthorize]
         public IActionResult Index()
         {
             TipoEventoDTO dto = new TipoEventoDTO();
@@ -35,11 +36,13 @@ namespace Projeto2025.Controllers
 
             return View(dto);
         }
+        [SessionAuthorize]
         public ActionResult Listar()
         {
             var lista = models.GetAll();
             return View(lista);
         }
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Salvar(TipoEventoDTO dto)
         {
@@ -70,6 +73,7 @@ namespace Projeto2025.Controllers
             return View("Index", dto);
 
         }
+        [SessionAuthorize]
         public IActionResult Excluir(int id)
         {
             try
@@ -86,6 +90,7 @@ namespace Projeto2025.Controllers
             var lista = models.GetAll();
             return View("Listar", lista);
         }
+        [SessionAuthorize]
         public IActionResult PreAlterar(int id)
         {
             //controller vai pra model > repositorio e depois retorna

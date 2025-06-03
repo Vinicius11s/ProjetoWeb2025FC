@@ -4,7 +4,7 @@
     ViewData["Title"] = "Venda";
 }
 
-<h1>Venda</h1>
+<h1>Venda Serviço</h1>
 
 <form asp-controller="Venda" asp-action="Salvar" method="post">
 
@@ -53,6 +53,11 @@
 
     <div class="form-group d-flex align-items-center gap-3">
         <button type="submit" class="btn btn-success">Salvar</button>
+
+        <a asp-action="Index" asp-controller="Venda" class="btn btn sucess">
+            Novo
+        </a>
+
         <span><strong>Total: R$ <span id="valor-total">0,00</span></strong></span>
     </div>
 

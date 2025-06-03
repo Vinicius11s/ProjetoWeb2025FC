@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Projeto2025.DTOs;
 using AutoMapper;
+using Projeto2025.Configuration;
 
 namespace Projeto2025.Controllers
 {
@@ -21,7 +22,7 @@ namespace Projeto2025.Controllers
             this.eventoModels = eventoModels;
             this.formaPagamentoModels = formaPagamentoModels;
         }
-
+        [SessionAuthorize]
         private IEnumerable<SelectListItem> carregaListaServicos()
         {
             var lista = servicoModels.GetAll();
@@ -31,6 +32,7 @@ namespace Projeto2025.Controllers
                 Text = s.NomeServico
             });
         }
+        [SessionAuthorize]
         private IEnumerable<SelectListItem> carregaListaEventos()
         {
             var lista = eventoModels.GetAll();
@@ -40,6 +42,7 @@ namespace Projeto2025.Controllers
                 Text = e.Descricao // ou outra descrição útil do evento
             });
         }
+        [SessionAuthorize]
         private IEnumerable<SelectListItem> carregaListaFormaPagamento()
         {
             var lista = formaPagamentoModels.GetAll();
@@ -49,7 +52,7 @@ namespace Projeto2025.Controllers
                 Text = f.Descricao
             });
         }
-
+        [SessionAuthorize]
         public IActionResult Index()
         {
             var servicos = servicoModels.GetAll();
@@ -80,7 +83,7 @@ namespace Projeto2025.Controllers
 
             return View(venda);
         }
-
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Salvar(VendaDTO venda)
         {

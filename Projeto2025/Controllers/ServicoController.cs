@@ -1,6 +1,7 @@
 ﻿using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Projeto2025.Configuration;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers
@@ -12,17 +13,20 @@ namespace Projeto2025.Controllers
         {
             this.models = models;
         }
+        [SessionAuthorize]
         public IActionResult Index()
         {
             ServicoDTO dto = new ServicoDTO();
             dto.id = 0;
             return View(dto);
         }
+        [SessionAuthorize]
         public ActionResult Listar()
         {
             var lista = models.GetAll();
             return View(lista);
         }
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Salvar(ServicoDTO dto)
         {
@@ -50,6 +54,7 @@ namespace Projeto2025.Controllers
             }
             return View("Index", dto);
         }
+        [SessionAuthorize]
         public IActionResult Excluir(int id)
         {
             try
@@ -66,6 +71,7 @@ namespace Projeto2025.Controllers
             var lista = models.GetAll();
             return View("Listar", lista);
         }
+        [SessionAuthorize]
         public IActionResult PreAlterar(int id)
         {
             var objDTO = this.models.GetServico(id);

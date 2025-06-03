@@ -20,7 +20,6 @@ namespace Entidades
         public String? Local { get; set; } = String.Empty;
         public String Status { get; set; } = String.Empty;
         public string? Observacoes { get; set; }
-        public decimal? ValorTotal { get; set; }
 
         public int idFormaPagamento { get; set; }
         public virtual FormaPagamento? FormaPagamento { get; set; }

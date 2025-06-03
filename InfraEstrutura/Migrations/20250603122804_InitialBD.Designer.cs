@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfraEstrutura.Migrations
 {
     [DbContext(typeof(EmpresaContexto))]
-    [Migration("20250602003604_InitialBD")]
+    [Migration("20250603122804_InitialBD")]
     partial class InitialBD
     {
         /// <inheritdoc />
@@ -41,10 +41,10 @@ namespace InfraEstrutura.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -81,7 +81,7 @@ namespace InfraEstrutura.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<DateTime>("DataEvento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -148,9 +148,6 @@ namespace InfraEstrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Eventoid")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
@@ -171,9 +168,9 @@ namespace InfraEstrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Eventoid");
-
                     b.HasIndex("Servicoid");
+
+                    b.HasIndex("idEvento");
 
                     b.HasIndex("idServico");
 
@@ -262,12 +259,12 @@ namespace InfraEstrutura.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FormaPagamentoId")
+                    b.Property<int?>("idFormaPagamento")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormaPagamentoId");
+                    b.HasIndex("idFormaPagamento");
 
                     b.ToTable("Vendas");
                 });
@@ -304,13 +301,16 @@ namespace InfraEstrutura.Migrations
 
             modelBuilder.Entity("Entidades.ItemVenda", b =>
                 {
-                    b.HasOne("Entidades.Evento", "Evento")
-                        .WithMany()
-                        .HasForeignKey("Eventoid");
-
                     b.HasOne("Entidades.Servico", null)
                         .WithMany("Itens")
                         .HasForeignKey("Servicoid");
+
+                    b.HasOne("Entidades.Evento", "Evento")
+                        .WithMany()
+                        .HasForeignKey("idEvento")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Evento_ItemVenda");
 
                     b.HasOne("Entidades.Servico", "Servico")
                         .WithMany()
@@ -337,7 +337,8 @@ namespace InfraEstrutura.Migrations
                 {
                     b.HasOne("Entidades.FormaPagamento", "FormaPagamento")
                         .WithMany()
-                        .HasForeignKey("FormaPagamentoId");
+                        .HasForeignKey("idFormaPagamento")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("FormaPagamento");
                 });

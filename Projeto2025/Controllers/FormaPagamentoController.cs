@@ -13,6 +13,7 @@ namespace Projeto2025.Controllers
         {
             this.models = models;
         }
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaFormaPagamento()
         {
             var listaFormas = models.GetAll();
@@ -22,6 +23,7 @@ namespace Projeto2025.Controllers
                 Text = e.Descricao.ToString()//colocarDescricao
             });
         }
+        [SessionAuthorize]
         public IActionResult Index()
         {
             FormaPagamentoDTO dto = new FormaPagamentoDTO();
@@ -31,11 +33,13 @@ namespace Projeto2025.Controllers
 
             return View(dto);
         }
+        [SessionAuthorize]
         public ActionResult Listar()
         {
             var lista = models.GetAll();
             return View(lista);
         }
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Salvar(FormaPagamentoDTO dto)
         {
@@ -66,6 +70,7 @@ namespace Projeto2025.Controllers
             return View("Index", dto);
 
         }
+        [SessionAuthorize]
         public IActionResult Excluir(int id)
         {
             try
@@ -82,6 +87,7 @@ namespace Projeto2025.Controllers
             var lista = models.GetAll();
             return View("Listar", lista);
         }
+        [SessionAuthorize]
         public IActionResult PreAlterar(int id)
         {
             var objDTO = this.models.GetFormaPagamento(id);

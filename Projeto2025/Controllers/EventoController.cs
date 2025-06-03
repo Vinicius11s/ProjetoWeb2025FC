@@ -2,6 +2,7 @@
 using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Projeto2025.Configuration;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers
@@ -20,7 +21,8 @@ namespace Projeto2025.Controllers
             this.clienteModels = clienteModels;
             this.formaPagamentoModels = formaPagamentoModels;
         }
-      
+
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaTipoEvento()
         {
             var listaTipoEve = tipoEventoModels.GetAll();
@@ -30,6 +32,7 @@ namespace Projeto2025.Controllers
                 Text = e.Descricao
             });
         }
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaClientes()
         {
             var listaCli = clienteModels.GetAll();
@@ -39,6 +42,7 @@ namespace Projeto2025.Controllers
                 Text = e.NomeCompleto.ToString()
             });
         }
+        [SessionAuthorize]
         public IEnumerable<SelectListItem> carregaListaFormaPagamento()
         {
             var listaForma = formaPagamentoModels.GetAll();
@@ -48,6 +52,7 @@ namespace Projeto2025.Controllers
                 Text = e.Descricao.ToString()
             });
         }
+        [SessionAuthorize]
         public IActionResult Index()
         {
             EventoDTO dto = new EventoDTO();
@@ -65,11 +70,13 @@ namespace Projeto2025.Controllers
 
             return View(dto);
         }
+        [SessionAuthorize]
         public ActionResult Listar()
         {
             var lista = models.GetAll();
             return View(lista);
         }
+        [SessionAuthorize]
         public ActionResult Excluir(int id)
         {
             try
@@ -98,6 +105,7 @@ namespace Projeto2025.Controllers
 
             return View("Index", objDTO);
         }
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Salvar(EventoDTO dto)
         {

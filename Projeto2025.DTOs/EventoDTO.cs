@@ -32,7 +32,6 @@ namespace Projeto2025.DTOs
         public int QuantidadePessoas { get; set; }
 
         [Display(Name = "Local")]
-        //[Required(ErrorMessage = "O Local do Evento é obrigatório")]
         public String Local { get; set; } = String.Empty;
 
         [Display(Name = "Escolha o Status do evento")]
@@ -42,13 +41,8 @@ namespace Projeto2025.DTOs
         [Display(Name = "Observações")]
         public string? Observacoes { get; set; }
 
-        [Display(Name = "Valor total a receber")]
-        public Decimal ValorTotal { get; set; }
-
         [Display(Name = "Informe a Forma de Pagamento")]
         public int idFormaPagamento { get; set; }
-
-        //public String Descricao { get; set; } = String.Empty;
 
         public string TipoEventoDescricao { get; set; } = String.Empty;
     }

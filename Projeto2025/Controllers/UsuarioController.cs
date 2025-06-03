@@ -1,6 +1,7 @@
 ﻿using Humanizer;
 using Interfaces.Models;
 using Microsoft.AspNetCore.Mvc;
+using Projeto2025.Configuration;
 using Projeto2025.DTOs;
 
 namespace Projeto2025.Controllers
